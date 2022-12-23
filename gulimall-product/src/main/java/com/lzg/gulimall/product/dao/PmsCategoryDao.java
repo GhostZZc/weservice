@@ -2,7 +2,10 @@ package com.lzg.gulimall.product.dao;
 
 import com.lzg.gulimall.product.entity.PmsCategoryEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lzg.gulimall.product.vo.CategoryVo;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * 商品三级分类
@@ -13,5 +16,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface PmsCategoryDao extends BaseMapper<PmsCategoryEntity> {
-	
+
+
+    List<CategoryVo> list();
+
 }

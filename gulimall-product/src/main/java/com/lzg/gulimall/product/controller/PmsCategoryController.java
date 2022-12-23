@@ -1,17 +1,15 @@
 package com.lzg.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
+import com.lzg.gulimall.product.vo.CategoryVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.lzg.gulimall.product.entity.PmsCategoryEntity;
 import com.lzg.gulimall.product.service.PmsCategoryService;
@@ -27,7 +25,7 @@ import com.lzg.gulimall.product.service.PmsCategoryService;
  * @date 2022-12-13 14:15:26
  */
 @RestController
-@RequestMapping("product/pmscategory")
+@RequestMapping("product/category")
 public class PmsCategoryController {
     @Autowired
     private PmsCategoryService pmsCategoryService;
@@ -86,6 +84,12 @@ public class PmsCategoryController {
 		pmsCategoryService.removeByIds(Arrays.asList(catIds));
 
         return R.ok();
+    }
+
+    @GetMapping("/tree")
+    public R tree(){
+        List<CategoryVo> categoryTree = pmsCategoryService.getCategoryTree();
+        return R.ok().put("data",categoryTree);
     }
 
 }
