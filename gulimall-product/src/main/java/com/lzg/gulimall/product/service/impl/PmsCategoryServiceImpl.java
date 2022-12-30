@@ -17,21 +17,27 @@ import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.Query;
 
 import com.lzg.gulimall.product.dao.PmsCategoryDao;
-import com.lzg.gulimall.product.entity.PmsCategoryEntity;
+import com.lzg.gulimall.product.entity.CategoryEntity;
 import com.lzg.gulimall.product.service.PmsCategoryService;
 
 
 @Service("pmsCategoryService")
-public class PmsCategoryServiceImpl extends ServiceImpl<PmsCategoryDao, PmsCategoryEntity> implements PmsCategoryService {
+public class PmsCategoryServiceImpl extends ServiceImpl<PmsCategoryDao, CategoryEntity> implements PmsCategoryService {
 
     @Autowired
     private PmsCategoryDao categoryDao;
 
     @Override
+    public boolean removeByIds(List<Long> catIds) {
+        baseMapper.deleteBatchIds(catIds);
+        return true;
+    }
+
+    @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        IPage<PmsCategoryEntity> page = this.page(
-                new Query<PmsCategoryEntity>().getPage(params),
-                new QueryWrapper<PmsCategoryEntity>()
+        IPage<CategoryEntity> page = this.page(
+                new Query<CategoryEntity>().getPage(params),
+                new QueryWrapper<CategoryEntity>()
         );
 
         return new PageUtils(page);
@@ -41,25 +47,23 @@ public class PmsCategoryServiceImpl extends ServiceImpl<PmsCategoryDao, PmsCateg
     public List<CategoryVo> getCategoryTree() {
         List<CategoryVo> list = categoryDao.list();
         List<CategoryVo> tree = list.stream()
-                .filter(it -> it.getParentCid() == 0)
+                .filter(it -> it.getParentCid().equals(0L))
                 .map(it -> {
                     it.setChildren(getChildren(it, list));
                     return it;
-                }).sorted(Comparator.comparingInt(menu -> (menu.getSort() == null ? 0 : menu.getSort())))
+                }).sorted(Comparator.comparingInt(menu -> menu.getSort() == null ? 0 : menu.getSort()))
                 .collect(Collectors.toList());
         return tree;
     }
 
-
-    private List<CategoryVo> getChildren(CategoryVo up,List<CategoryVo> list){
-        return list.stream()
-                .filter(it->it.getParentCid()==up.getCatId())
-                .map(it->{
-                    it.setChildren(getChildren(it,list));
+    private List<CategoryVo> getChildren(CategoryVo categoryVo, List<CategoryVo> all) {
+        return all.stream().filter(it -> it.getParentCid().equals(categoryVo.getCatId()))
+                .map(it -> {
+                    it.setChildren(getChildren(it, all));
                     return it;
-                }).sorted(Comparator.comparingInt(menu->(menu.getSort())==null?0: menu.getSort()))
+                }).sorted(Comparator.comparingInt(menu -> menu.getSort() == null ? 0 : menu.getSort()))
                 .collect(Collectors.toList());
-
     }
+
 
 }

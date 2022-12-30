@@ -4,7 +4,7 @@
 <mapper namespace="com.lzg.gulimall.product.dao.PmsCategoryDao">
 
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.lzg.gulimall.product.entity.PmsCategoryEntity" id="pmsCategoryMap">
+    <resultMap type="com.lzg.gulimall.product.entity.CategoryEntity" id="pmsCategoryMap">
         <result property="catId" column="cat_id"/>
         <result property="name" column="name"/>
         <result property="parentCid" column="parent_cid"/>
@@ -19,7 +19,7 @@
     <!-- List<CategoryVo> list();-->
     <select id="list" resultType="com.lzg.gulimall.product.vo.CategoryVo">
         select cat_id,name,parent_cid,cat_level,show_status,sort,icon,product_unit,product_count
-        from pms_category
+        from pms_category where show_status = 1;
     </select>
 
 </mapper>

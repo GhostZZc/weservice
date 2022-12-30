@@ -26,7 +26,7 @@ import com.lzg.gulimall.product.service.PmsBrandService;
  * @date 2022-12-13 14:15:26
  */
 @RestController
-@RequestMapping("product/pmsbrand")
+@RequestMapping("product/brand")
 public class PmsBrandController {
     @Autowired
     private PmsBrandService pmsBrandService;

@@ -1,6 +1,6 @@
 package com.lzg.gulimall.product.vo;
 
-import com.lzg.gulimall.product.entity.PmsCategoryEntity;
+import com.lzg.gulimall.product.entity.CategoryEntity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class CategoryVo extends PmsCategoryEntity {
+public class CategoryVo extends CategoryEntity {
 
     private List<CategoryVo> children;
 

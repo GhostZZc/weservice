@@ -1,11 +1,14 @@
 package com.lzg.gulimall.product.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 商品三级分类
@@ -16,13 +19,14 @@ import lombok.Data;
  */
 @Data
 @TableName("pms_category")
-public class PmsCategoryEntity implements Serializable {
+@Accessors(chain = true)
+public class CategoryEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 分类id
 	 */
-	@TableId
+	@TableId(type = IdType.AUTO)
 	private Long catId;
 	/**
 	 * 分类名称
@@ -39,6 +43,7 @@ public class PmsCategoryEntity implements Serializable {
 	/**
 	 * 是否显示[0-不显示，1显示]
 	 */
+	@TableLogic
 	private Integer showStatus;
 	/**
 	 * 排序

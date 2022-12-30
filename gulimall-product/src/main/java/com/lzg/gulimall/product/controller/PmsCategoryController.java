@@ -1,6 +1,5 @@
 package com.lzg.gulimall.product.controller;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +10,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.lzg.gulimall.product.entity.PmsCategoryEntity;
+import com.lzg.gulimall.product.entity.CategoryEntity;
 import com.lzg.gulimall.product.service.PmsCategoryService;
 
 
@@ -33,7 +32,7 @@ public class PmsCategoryController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list/tree")
     @RequiresPermissions("product:pmscategory:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = pmsCategoryService.queryPage(params);
@@ -48,9 +47,9 @@ public class PmsCategoryController {
     @RequestMapping("/info/{catId}")
     @RequiresPermissions("product:pmscategory:info")
     public R info(@PathVariable("catId") Long catId){
-		PmsCategoryEntity pmsCategory = pmsCategoryService.getById(catId);
+		CategoryEntity pmsCategory = pmsCategoryService.getById(catId);
 
-        return R.ok().put("pmsCategory", pmsCategory);
+        return R.ok().put("data", pmsCategory);
     }
 
     /**
@@ -58,7 +57,7 @@ public class PmsCategoryController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmscategory:save")
-    public R save(@RequestBody PmsCategoryEntity pmsCategory){
+    public R save(@RequestBody CategoryEntity pmsCategory){
 		pmsCategoryService.save(pmsCategory);
 
         return R.ok();
@@ -69,9 +68,16 @@ public class PmsCategoryController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmscategory:update")
-    public R update(@RequestBody PmsCategoryEntity pmsCategory){
+    public R update(@RequestBody CategoryEntity pmsCategory){
 		pmsCategoryService.updateById(pmsCategory);
 
+        return R.ok();
+    }
+
+    @PostMapping("/update/sort")
+    @RequiresPermissions("product:pmscategory:update:sort")
+    public R updateBatch(@RequestBody List<CategoryEntity> list){
+        pmsCategoryService.updateBatchById(list);
         return R.ok();
     }
 
@@ -80,10 +86,10 @@ public class PmsCategoryController {
      */
     @RequestMapping("/delete")
     @RequiresPermissions("product:pmscategory:delete")
-    public R delete(@RequestBody Long[] catIds){
-		pmsCategoryService.removeByIds(Arrays.asList(catIds));
+    public R delete(@RequestBody List<Long> catIds){
+        boolean delete = pmsCategoryService.removeByIds(catIds);
 
-        return R.ok();
+        return delete?R.ok("删除成功"):R.error("删除失败");
     }
 
     @GetMapping("/tree")

@@ -27,7 +27,7 @@ import com.lzg.gulimall.product.service.PmsCategoryBrandRelationService;
  * @date 2022-12-13 14:15:27
  */
 @RestController
-@RequestMapping("product/pmscategorybrandrelation")
+@RequestMapping("product/categorybrandrelation")
 public class PmsCategoryBrandRelationController {
     @Autowired
     private PmsCategoryBrandRelationService pmsCategoryBrandRelationService;
