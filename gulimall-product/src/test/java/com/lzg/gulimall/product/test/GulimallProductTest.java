@@ -1,6 +1,6 @@
 package com.lzg.gulimall.product.test;
 
-import com.lzg.gulimall.product.entity.PmsBrandEntity;
+import com.lzg.gulimall.product.entity.BrandEntity;
 import com.lzg.gulimall.product.service.PmsBrandService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class GulimallProductTest {
 
     @Test
     void contextLoads() {
-        PmsBrandEntity brandEntity = new PmsBrandEntity();
+        BrandEntity brandEntity = new BrandEntity();
         brandEntity.setDescript("hello");
         brandEntity.setName("华为");
         brandService.save(brandEntity);

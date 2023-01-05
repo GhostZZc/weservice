@@ -9,14 +9,14 @@ import lombok.Data;
 
 /**
  * 属性分组
- * 
+ *
  * @author lzg
  * @email ${email}
  * @date 2022-12-13 14:15:27
  */
 @Data
 @TableName("pms_attr_group")
-public class PmsAttrGroupEntity implements Serializable {
+public class AttrGroupEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

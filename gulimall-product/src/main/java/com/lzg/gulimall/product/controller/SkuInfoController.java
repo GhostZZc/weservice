@@ -13,31 +13,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lzg.gulimall.product.entity.PmsBrandEntity;
-import com.lzg.gulimall.product.service.PmsBrandService;
+import com.lzg.gulimall.product.entity.PmsSkuInfoEntity;
+import com.lzg.gulimall.product.service.PmsSkuInfoService;
 
 
 
 /**
- * 品牌
+ * sku信息
  *
  * @author lzg
  * @email ${email}
- * @date 2022-12-13 14:15:26
+ * @date 2022-12-13 14:15:27
  */
 @RestController
-@RequestMapping("product/brand")
-public class PmsBrandController {
+@RequestMapping("product/skuinfo")
+public class SkuInfoController {
     @Autowired
-    private PmsBrandService pmsBrandService;
+    private PmsSkuInfoService pmsSkuInfoService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("product:pmsbrand:list")
+    @RequiresPermissions("product:pmsskuinfo:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = pmsBrandService.queryPage(params);
+        PageUtils page = pmsSkuInfoService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -46,21 +46,21 @@ public class PmsBrandController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{brandId}")
-    @RequiresPermissions("product:pmsbrand:info")
-    public R info(@PathVariable("brandId") Long brandId){
-		PmsBrandEntity pmsBrand = pmsBrandService.getById(brandId);
+    @RequestMapping("/info/{skuId}")
+    @RequiresPermissions("product:pmsskuinfo:info")
+    public R info(@PathVariable("skuId") Long skuId){
+		PmsSkuInfoEntity pmsSkuInfo = pmsSkuInfoService.getById(skuId);
 
-        return R.ok().put("pmsBrand", pmsBrand);
+        return R.ok().put("pmsSkuInfo", pmsSkuInfo);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("product:pmsbrand:save")
-    public R save(@RequestBody PmsBrandEntity pmsBrand){
-		pmsBrandService.save(pmsBrand);
+    @RequiresPermissions("product:pmsskuinfo:save")
+    public R save(@RequestBody PmsSkuInfoEntity pmsSkuInfo){
+		pmsSkuInfoService.save(pmsSkuInfo);
 
         return R.ok();
     }
@@ -69,9 +69,9 @@ public class PmsBrandController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("product:pmsbrand:update")
-    public R update(@RequestBody PmsBrandEntity pmsBrand){
-		pmsBrandService.updateById(pmsBrand);
+    @RequiresPermissions("product:pmsskuinfo:update")
+    public R update(@RequestBody PmsSkuInfoEntity pmsSkuInfo){
+		pmsSkuInfoService.updateById(pmsSkuInfo);
 
         return R.ok();
     }
@@ -80,9 +80,9 @@ public class PmsBrandController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("product:pmsbrand:delete")
-    public R delete(@RequestBody Long[] brandIds){
-		pmsBrandService.removeByIds(Arrays.asList(brandIds));
+    @RequiresPermissions("product:pmsskuinfo:delete")
+    public R delete(@RequestBody Long[] skuIds){
+		pmsSkuInfoService.removeByIds(Arrays.asList(skuIds));
 
         return R.ok();
     }

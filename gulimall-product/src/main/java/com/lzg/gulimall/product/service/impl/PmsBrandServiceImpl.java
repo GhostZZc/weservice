@@ -10,20 +10,20 @@ import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.Query;
 
 import com.lzg.gulimall.product.dao.PmsBrandDao;
-import com.lzg.gulimall.product.entity.PmsBrandEntity;
+import com.lzg.gulimall.product.entity.BrandEntity;
 import com.lzg.gulimall.product.service.PmsBrandService;
 
 
 @Service("pmsBrandService")
-public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandDao, PmsBrandEntity> implements PmsBrandService {
+public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandDao, BrandEntity> implements PmsBrandService {
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        IPage<PmsBrandEntity> page = this.page(
-                new Query<PmsBrandEntity>().getPage(params),
-                new QueryWrapper<PmsBrandEntity>()
+        IPage<BrandEntity> page = this.page(
+                new Query<BrandEntity>().getPage(params),
+                new QueryWrapper<BrandEntity>().like("name",params.get("key"))
         );
-
+        page.setTotal(page.getRecords().size());
         return new PageUtils(page);
     }
 

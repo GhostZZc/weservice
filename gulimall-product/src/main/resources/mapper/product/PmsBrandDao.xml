@@ -4,7 +4,7 @@
 <mapper namespace="com.lzg.gulimall.product.dao.PmsBrandDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.lzg.gulimall.product.entity.PmsBrandEntity" id="pmsBrandMap">
+    <resultMap type="com.lzg.gulimall.product.entity.BrandEntity" id="pmsBrandMap">
         <result property="brandId" column="brand_id"/>
         <result property="name" column="name"/>
         <result property="logo" column="logo"/>

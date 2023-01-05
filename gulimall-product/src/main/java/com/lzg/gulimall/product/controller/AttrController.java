@@ -5,13 +5,11 @@ import java.util.Map;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
+import com.lzg.gulimall.product.utils.AttrType;
+import com.lzg.gulimall.product.vo.AttrVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.lzg.gulimall.product.entity.PmsAttrEntity;
 import com.lzg.gulimall.product.service.PmsAttrService;
@@ -27,19 +25,25 @@ import com.lzg.gulimall.product.service.PmsAttrService;
  * @date 2022-12-13 14:15:26
  */
 @RestController
-@RequestMapping("product/pmsattr")
-public class PmsAttrController {
+@RequestMapping("product/attr")
+public class AttrController {
     @Autowired
     private PmsAttrService pmsAttrService;
 
     /**
-     * 列表
+     * 规格参数列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/base/list/{catelogId}")
     @RequiresPermissions("product:pmsattr:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = pmsAttrService.queryPage(params);
+    public R list(@RequestParam Map<String, Object> params,@PathVariable Long catelogId){
+        PageUtils page = pmsAttrService.queryPage(params,catelogId, AttrType.BASE);
 
+        return R.ok().put("page", page);
+    }
+
+    @GetMapping("/sale/list/{catelogId}")
+    public  R saleList(@RequestParam Map<String,Object> params,@PathVariable Long catelogId){
+        PageUtils page = pmsAttrService.queryPage(params,catelogId, AttrType.SALE);
         return R.ok().put("page", page);
     }
 
@@ -50,9 +54,8 @@ public class PmsAttrController {
     @RequestMapping("/info/{attrId}")
     @RequiresPermissions("product:pmsattr:info")
     public R info(@PathVariable("attrId") Long attrId){
-		PmsAttrEntity pmsAttr = pmsAttrService.getById(attrId);
-
-        return R.ok().put("pmsAttr", pmsAttr);
+        AttrVo attrVo = pmsAttrService.getById(attrId);
+        return R.ok().put("attr",attrVo);
     }
 
     /**

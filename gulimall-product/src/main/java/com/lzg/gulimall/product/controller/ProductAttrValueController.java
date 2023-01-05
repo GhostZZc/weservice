@@ -13,32 +13,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lzg.gulimall.product.entity.PmsCommentReplayEntity;
-import com.lzg.gulimall.product.service.PmsCommentReplayService;
+import com.lzg.gulimall.product.entity.PmsProductAttrValueEntity;
+import com.lzg.gulimall.product.service.PmsProductAttrValueService;
 
 
 
 
 /**
- * 商品评价回复关系
+ * spu属性值
  *
  * @author lzg
  * @email ${email}
  * @date 2022-12-13 14:15:26
  */
 @RestController
-@RequestMapping("product/pmscommentreplay")
-public class PmsCommentReplayController {
+@RequestMapping("product/productattrvalue")
+public class ProductAttrValueController {
     @Autowired
-    private PmsCommentReplayService pmsCommentReplayService;
+    private PmsProductAttrValueService pmsProductAttrValueService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("product:pmscommentreplay:list")
+    @RequiresPermissions("product:pmsproductattrvalue:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = pmsCommentReplayService.queryPage(params);
+        PageUtils page = pmsProductAttrValueService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -48,20 +48,20 @@ public class PmsCommentReplayController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("product:pmscommentreplay:info")
+    @RequiresPermissions("product:pmsproductattrvalue:info")
     public R info(@PathVariable("id") Long id){
-		PmsCommentReplayEntity pmsCommentReplay = pmsCommentReplayService.getById(id);
+		PmsProductAttrValueEntity pmsProductAttrValue = pmsProductAttrValueService.getById(id);
 
-        return R.ok().put("pmsCommentReplay", pmsCommentReplay);
+        return R.ok().put("pmsProductAttrValue", pmsProductAttrValue);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("product:pmscommentreplay:save")
-    public R save(@RequestBody PmsCommentReplayEntity pmsCommentReplay){
-		pmsCommentReplayService.save(pmsCommentReplay);
+    @RequiresPermissions("product:pmsproductattrvalue:save")
+    public R save(@RequestBody PmsProductAttrValueEntity pmsProductAttrValue){
+		pmsProductAttrValueService.save(pmsProductAttrValue);
 
         return R.ok();
     }
@@ -70,9 +70,9 @@ public class PmsCommentReplayController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("product:pmscommentreplay:update")
-    public R update(@RequestBody PmsCommentReplayEntity pmsCommentReplay){
-		pmsCommentReplayService.updateById(pmsCommentReplay);
+    @RequiresPermissions("product:pmsproductattrvalue:update")
+    public R update(@RequestBody PmsProductAttrValueEntity pmsProductAttrValue){
+		pmsProductAttrValueService.updateById(pmsProductAttrValue);
 
         return R.ok();
     }
@@ -81,9 +81,9 @@ public class PmsCommentReplayController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("product:pmscommentreplay:delete")
+    @RequiresPermissions("product:pmsproductattrvalue:delete")
     public R delete(@RequestBody Long[] ids){
-		pmsCommentReplayService.removeByIds(Arrays.asList(ids));
+		pmsProductAttrValueService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

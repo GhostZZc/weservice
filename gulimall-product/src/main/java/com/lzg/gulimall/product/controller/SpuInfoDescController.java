@@ -13,31 +13,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lzg.gulimall.product.entity.PmsSkuInfoEntity;
-import com.lzg.gulimall.product.service.PmsSkuInfoService;
+import com.lzg.gulimall.product.entity.PmsSpuInfoDescEntity;
+import com.lzg.gulimall.product.service.PmsSpuInfoDescService;
+
 
 
 
 /**
- * sku信息
+ * spu信息介绍
  *
  * @author lzg
  * @email ${email}
  * @date 2022-12-13 14:15:27
  */
 @RestController
-@RequestMapping("product/pmsskuinfo")
-public class PmsSkuInfoController {
+@RequestMapping("product/spuinfodesc")
+public class SpuInfoDescController {
     @Autowired
-    private PmsSkuInfoService pmsSkuInfoService;
+    private PmsSpuInfoDescService pmsSpuInfoDescService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("product:pmsskuinfo:list")
+    @RequiresPermissions("product:pmsspuinfodesc:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = pmsSkuInfoService.queryPage(params);
+        PageUtils page = pmsSpuInfoDescService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -46,21 +47,21 @@ public class PmsSkuInfoController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{skuId}")
-    @RequiresPermissions("product:pmsskuinfo:info")
-    public R info(@PathVariable("skuId") Long skuId){
-		PmsSkuInfoEntity pmsSkuInfo = pmsSkuInfoService.getById(skuId);
+    @RequestMapping("/info/{spuId}")
+    @RequiresPermissions("product:pmsspuinfodesc:info")
+    public R info(@PathVariable("spuId") Long spuId){
+		PmsSpuInfoDescEntity pmsSpuInfoDesc = pmsSpuInfoDescService.getById(spuId);
 
-        return R.ok().put("pmsSkuInfo", pmsSkuInfo);
+        return R.ok().put("pmsSpuInfoDesc", pmsSpuInfoDesc);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("product:pmsskuinfo:save")
-    public R save(@RequestBody PmsSkuInfoEntity pmsSkuInfo){
-		pmsSkuInfoService.save(pmsSkuInfo);
+    @RequiresPermissions("product:pmsspuinfodesc:save")
+    public R save(@RequestBody PmsSpuInfoDescEntity pmsSpuInfoDesc){
+		pmsSpuInfoDescService.save(pmsSpuInfoDesc);
 
         return R.ok();
     }
@@ -69,9 +70,9 @@ public class PmsSkuInfoController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("product:pmsskuinfo:update")
-    public R update(@RequestBody PmsSkuInfoEntity pmsSkuInfo){
-		pmsSkuInfoService.updateById(pmsSkuInfo);
+    @RequiresPermissions("product:pmsspuinfodesc:update")
+    public R update(@RequestBody PmsSpuInfoDescEntity pmsSpuInfoDesc){
+		pmsSpuInfoDescService.updateById(pmsSpuInfoDesc);
 
         return R.ok();
     }
@@ -80,9 +81,9 @@ public class PmsSkuInfoController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("product:pmsskuinfo:delete")
-    public R delete(@RequestBody Long[] skuIds){
-		pmsSkuInfoService.removeByIds(Arrays.asList(skuIds));
+    @RequiresPermissions("product:pmsspuinfodesc:delete")
+    public R delete(@RequestBody Long[] spuIds){
+		pmsSpuInfoDescService.removeByIds(Arrays.asList(spuIds));
 
         return R.ok();
     }

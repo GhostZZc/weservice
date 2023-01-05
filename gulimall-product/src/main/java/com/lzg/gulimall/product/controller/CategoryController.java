@@ -25,14 +25,14 @@ import com.lzg.gulimall.product.service.PmsCategoryService;
  */
 @RestController
 @RequestMapping("product/category")
-public class PmsCategoryController {
+public class CategoryController {
     @Autowired
     private PmsCategoryService pmsCategoryService;
 
     /**
      * 列表
      */
-    @RequestMapping("/list/tree")
+    @RequestMapping("/list")
     @RequiresPermissions("product:pmscategory:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = pmsCategoryService.queryPage(params);

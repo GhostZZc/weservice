@@ -13,32 +13,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lzg.gulimall.product.entity.PmsAttrAttrgroupRelationEntity;
-import com.lzg.gulimall.product.service.PmsAttrAttrgroupRelationService;
+import com.lzg.gulimall.product.entity.PmsCommentReplayEntity;
+import com.lzg.gulimall.product.service.PmsCommentReplayService;
 
 
 
 
 /**
- * 属性&属性分组关联
+ * 商品评价回复关系
  *
  * @author lzg
  * @email ${email}
  * @date 2022-12-13 14:15:26
  */
 @RestController
-@RequestMapping("product/pmsattrattrgrouprelation")
-public class PmsAttrAttrgroupRelationController {
+@RequestMapping("product/commentreplay")
+public class CommentReplayController {
     @Autowired
-    private PmsAttrAttrgroupRelationService pmsAttrAttrgroupRelationService;
+    private PmsCommentReplayService pmsCommentReplayService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("product:pmsattrattrgrouprelation:list")
+    @RequiresPermissions("product:pmscommentreplay:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = pmsAttrAttrgroupRelationService.queryPage(params);
+        PageUtils page = pmsCommentReplayService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -48,20 +48,20 @@ public class PmsAttrAttrgroupRelationController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("product:pmsattrattrgrouprelation:info")
+    @RequiresPermissions("product:pmscommentreplay:info")
     public R info(@PathVariable("id") Long id){
-		PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRelation = pmsAttrAttrgroupRelationService.getById(id);
+		PmsCommentReplayEntity pmsCommentReplay = pmsCommentReplayService.getById(id);
 
-        return R.ok().put("pmsAttrAttrgroupRelation", pmsAttrAttrgroupRelation);
+        return R.ok().put("pmsCommentReplay", pmsCommentReplay);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("product:pmsattrattrgrouprelation:save")
-    public R save(@RequestBody PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRelation){
-		pmsAttrAttrgroupRelationService.save(pmsAttrAttrgroupRelation);
+    @RequiresPermissions("product:pmscommentreplay:save")
+    public R save(@RequestBody PmsCommentReplayEntity pmsCommentReplay){
+		pmsCommentReplayService.save(pmsCommentReplay);
 
         return R.ok();
     }
@@ -70,9 +70,9 @@ public class PmsAttrAttrgroupRelationController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("product:pmsattrattrgrouprelation:update")
-    public R update(@RequestBody PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRelation){
-		pmsAttrAttrgroupRelationService.updateById(pmsAttrAttrgroupRelation);
+    @RequiresPermissions("product:pmscommentreplay:update")
+    public R update(@RequestBody PmsCommentReplayEntity pmsCommentReplay){
+		pmsCommentReplayService.updateById(pmsCommentReplay);
 
         return R.ok();
     }
@@ -81,9 +81,9 @@ public class PmsAttrAttrgroupRelationController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("product:pmsattrattrgrouprelation:delete")
+    @RequiresPermissions("product:pmscommentreplay:delete")
     public R delete(@RequestBody Long[] ids){
-		pmsAttrAttrgroupRelationService.removeByIds(Arrays.asList(ids));
+		pmsCommentReplayService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

@@ -13,32 +13,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lzg.gulimall.product.entity.PmsSpuImagesEntity;
-import com.lzg.gulimall.product.service.PmsSpuImagesService;
+import com.lzg.gulimall.product.entity.PmsSkuImagesEntity;
+import com.lzg.gulimall.product.service.PmsSkuImagesService;
 
 
 
 
 /**
- * spu图片
+ * sku图片
  *
  * @author lzg
  * @email ${email}
  * @date 2022-12-13 14:15:27
  */
 @RestController
-@RequestMapping("product/pmsspuimages")
-public class PmsSpuImagesController {
+@RequestMapping("product/skuimages")
+public class SkuImagesController {
     @Autowired
-    private PmsSpuImagesService pmsSpuImagesService;
+    private PmsSkuImagesService pmsSkuImagesService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("product:pmsspuimages:list")
+    @RequiresPermissions("product:pmsskuimages:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = pmsSpuImagesService.queryPage(params);
+        PageUtils page = pmsSkuImagesService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -48,20 +48,20 @@ public class PmsSpuImagesController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("product:pmsspuimages:info")
+    @RequiresPermissions("product:pmsskuimages:info")
     public R info(@PathVariable("id") Long id){
-		PmsSpuImagesEntity pmsSpuImages = pmsSpuImagesService.getById(id);
+		PmsSkuImagesEntity pmsSkuImages = pmsSkuImagesService.getById(id);
 
-        return R.ok().put("pmsSpuImages", pmsSpuImages);
+        return R.ok().put("pmsSkuImages", pmsSkuImages);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("product:pmsspuimages:save")
-    public R save(@RequestBody PmsSpuImagesEntity pmsSpuImages){
-		pmsSpuImagesService.save(pmsSpuImages);
+    @RequiresPermissions("product:pmsskuimages:save")
+    public R save(@RequestBody PmsSkuImagesEntity pmsSkuImages){
+		pmsSkuImagesService.save(pmsSkuImages);
 
         return R.ok();
     }
@@ -70,9 +70,9 @@ public class PmsSpuImagesController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("product:pmsspuimages:update")
-    public R update(@RequestBody PmsSpuImagesEntity pmsSpuImages){
-		pmsSpuImagesService.updateById(pmsSpuImages);
+    @RequiresPermissions("product:pmsskuimages:update")
+    public R update(@RequestBody PmsSkuImagesEntity pmsSkuImages){
+		pmsSkuImagesService.updateById(pmsSkuImages);
 
         return R.ok();
     }
@@ -81,9 +81,9 @@ public class PmsSpuImagesController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("product:pmsspuimages:delete")
+    @RequiresPermissions("product:pmsskuimages:delete")
     public R delete(@RequestBody Long[] ids){
-		pmsSpuImagesService.removeByIds(Arrays.asList(ids));
+		pmsSkuImagesService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

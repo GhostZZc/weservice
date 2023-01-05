@@ -1,17 +1,16 @@
 package com.lzg.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.lzg.gulimall.product.entity.PmsCategoryBrandRelationEntity;
 import com.lzg.gulimall.product.service.PmsCategoryBrandRelationService;
@@ -28,9 +27,20 @@ import com.lzg.gulimall.product.service.PmsCategoryBrandRelationService;
  */
 @RestController
 @RequestMapping("product/categorybrandrelation")
-public class PmsCategoryBrandRelationController {
+public class CategoryBrandRelationController {
     @Autowired
     private PmsCategoryBrandRelationService pmsCategoryBrandRelationService;
+
+    /**
+     * 获取品牌关联的全部分类列表
+     * @param brandId
+     * @return
+     */
+    @GetMapping("/catelog/list")
+    public R listByBrandId(Long brandId){
+        List<PmsCategoryBrandRelationEntity> data = pmsCategoryBrandRelationService.list(new QueryWrapper<PmsCategoryBrandRelationEntity>().eq("brand_id", brandId));
+        return R.ok().put("data",data);
+    }
 
     /**
      * 列表
@@ -61,8 +71,7 @@ public class PmsCategoryBrandRelationController {
     @RequestMapping("/save")
     @RequiresPermissions("product:pmscategorybrandrelation:save")
     public R save(@RequestBody PmsCategoryBrandRelationEntity pmsCategoryBrandRelation){
-		pmsCategoryBrandRelationService.save(pmsCategoryBrandRelation);
-
+		pmsCategoryBrandRelationService.saveCategoryBrandRelation(pmsCategoryBrandRelation);
         return R.ok();
     }
 

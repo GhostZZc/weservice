@@ -1,5 +1,6 @@
 package com.lzg.gulimall.product.vo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.lzg.gulimall.product.entity.CategoryEntity;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -16,6 +17,7 @@ import java.util.List;
 @Accessors(chain = true)
 public class CategoryVo extends CategoryEntity {
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<CategoryVo> children;
 
 

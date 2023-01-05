@@ -13,32 +13,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lzg.gulimall.product.entity.PmsSkuSaleAttrValueEntity;
-import com.lzg.gulimall.product.service.PmsSkuSaleAttrValueService;
+import com.lzg.gulimall.product.entity.PmsAttrAttrgroupRelationEntity;
+import com.lzg.gulimall.product.service.PmsAttrAttrgroupRelationService;
 
 
 
 
 /**
- * sku销售属性&值
+ * 属性&属性分组关联
  *
  * @author lzg
  * @email ${email}
  * @date 2022-12-13 14:15:26
  */
 @RestController
-@RequestMapping("product/pmsskusaleattrvalue")
-public class PmsSkuSaleAttrValueController {
+@RequestMapping("product/attrattrgrouprelation")
+public class AttrAttrgroupRelationController {
     @Autowired
-    private PmsSkuSaleAttrValueService pmsSkuSaleAttrValueService;
+    private PmsAttrAttrgroupRelationService pmsAttrAttrgroupRelationService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("product:pmsskusaleattrvalue:list")
+    @RequiresPermissions("product:pmsattrattrgrouprelation:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = pmsSkuSaleAttrValueService.queryPage(params);
+        PageUtils page = pmsAttrAttrgroupRelationService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -48,20 +48,20 @@ public class PmsSkuSaleAttrValueController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("product:pmsskusaleattrvalue:info")
+    @RequiresPermissions("product:pmsattrattrgrouprelation:info")
     public R info(@PathVariable("id") Long id){
-		PmsSkuSaleAttrValueEntity pmsSkuSaleAttrValue = pmsSkuSaleAttrValueService.getById(id);
+		PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRelation = pmsAttrAttrgroupRelationService.getById(id);
 
-        return R.ok().put("pmsSkuSaleAttrValue", pmsSkuSaleAttrValue);
+        return R.ok().put("pmsAttrAttrgroupRelation", pmsAttrAttrgroupRelation);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("product:pmsskusaleattrvalue:save")
-    public R save(@RequestBody PmsSkuSaleAttrValueEntity pmsSkuSaleAttrValue){
-		pmsSkuSaleAttrValueService.save(pmsSkuSaleAttrValue);
+    @RequiresPermissions("product:pmsattrattrgrouprelation:save")
+    public R save(@RequestBody PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRelation){
+		pmsAttrAttrgroupRelationService.save(pmsAttrAttrgroupRelation);
 
         return R.ok();
     }
@@ -70,9 +70,9 @@ public class PmsSkuSaleAttrValueController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("product:pmsskusaleattrvalue:update")
-    public R update(@RequestBody PmsSkuSaleAttrValueEntity pmsSkuSaleAttrValue){
-		pmsSkuSaleAttrValueService.updateById(pmsSkuSaleAttrValue);
+    @RequiresPermissions("product:pmsattrattrgrouprelation:update")
+    public R update(@RequestBody PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRelation){
+		pmsAttrAttrgroupRelationService.updateById(pmsAttrAttrgroupRelation);
 
         return R.ok();
     }
@@ -81,9 +81,9 @@ public class PmsSkuSaleAttrValueController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("product:pmsskusaleattrvalue:delete")
+    @RequiresPermissions("product:pmsattrattrgrouprelation:delete")
     public R delete(@RequestBody Long[] ids){
-		pmsSkuSaleAttrValueService.removeByIds(Arrays.asList(ids));
+		pmsAttrAttrgroupRelationService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }
