@@ -35,6 +35,11 @@ public class GulimallExceptionControllerAdvice {
         return R.error(BizCodeEnum.VAILD_EXCEPTION.getCode(),BizCodeEnum.VAILD_EXCEPTION.getMsg()).put("data",errorMap);
     }
 
+    @ExceptionHandler(value = ProductException.class)
+    public R handleProductException(ProductException e){
+        return R.error(BizCodeEnum.Product_EXCEPTION.getCode(),e.getMessage());
+    }
+
     @ExceptionHandler(value = Throwable.class)
     public R handleException(Throwable throwable){
         log.error("错误：",throwable);

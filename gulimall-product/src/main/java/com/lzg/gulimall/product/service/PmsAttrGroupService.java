@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.product.entity.AttrGroupEntity;
+import com.lzg.gulimall.product.vo.AttrGroupAttrVo;
 import com.lzg.gulimall.product.vo.AttrGroupVo;
 
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,5 +23,7 @@ public interface PmsAttrGroupService extends IService<AttrGroupEntity> {
     AttrGroupVo getById(Long attrGroupId);
 
     PageUtils queryPage(Map<String, Object> params,Long categoryId);
+
+    List<AttrGroupAttrVo> getByCatelogId(Long catelogId);
 }
 

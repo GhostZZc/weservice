@@ -1,10 +1,13 @@
 package com.lzg.gulimall.product.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.lzg.gulimall.common.utils.OrikaBeanMapper;
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.Query;
+import com.lzg.gulimall.product.dao.PmsAttrDao;
 import com.lzg.gulimall.product.dao.PmsCategoryDao;
 import com.lzg.gulimall.product.utils.CategoryPathUtil;
+import com.lzg.gulimall.product.vo.AttrGroupAttrVo;
 import com.lzg.gulimall.product.vo.AttrGroupVo;
 import com.lzg.gulimall.product.vo.CategoryVo;
 import org.apache.logging.log4j.util.Strings;
@@ -28,6 +31,9 @@ public class PmsAttrGroupServiceImpl extends ServiceImpl<PmsAttrGroupDao, AttrGr
 
     @Autowired
     private PmsCategoryDao categoryDao;
+
+    @Autowired
+    private PmsAttrDao attrDao;
 
 
     @Override
@@ -54,6 +60,15 @@ public class PmsAttrGroupServiceImpl extends ServiceImpl<PmsAttrGroupDao, AttrGr
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<AttrGroupAttrVo> getByCatelogId(Long catelogId) {
+        //先分别去找分组和具体属性
+        List<AttrGroupAttrVo> attrGroupAttrVos = baseMapper.seletByCateLogId(catelogId);
+
+
+        return attrGroupAttrVos;
     }
 
 }

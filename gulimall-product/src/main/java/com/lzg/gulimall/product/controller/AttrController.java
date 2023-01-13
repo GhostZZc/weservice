@@ -63,9 +63,8 @@ public class AttrController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmsattr:save")
-    public R save(@RequestBody PmsAttrEntity pmsAttr){
-		pmsAttrService.save(pmsAttr);
-
+    public R save(@RequestBody AttrVo attrVo){
+		pmsAttrService.save(attrVo);
         return R.ok();
     }
 
@@ -74,9 +73,8 @@ public class AttrController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmsattr:update")
-    public R update(@RequestBody PmsAttrEntity pmsAttr){
-		pmsAttrService.updateById(pmsAttr);
-
+    public R update(@RequestBody AttrVo attrVo){
+		pmsAttrService.update(attrVo);
         return R.ok();
     }
 

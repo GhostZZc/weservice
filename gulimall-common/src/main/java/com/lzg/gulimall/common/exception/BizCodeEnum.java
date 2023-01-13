@@ -8,7 +8,8 @@ package com.lzg.gulimall.common.exception;
  */
 public enum BizCodeEnum {
     UNKNOW_EXCEPTION(10000,"系统未知异常"),
-    VAILD_EXCEPTION(10001,"参数格式校验失败");
+    VAILD_EXCEPTION(10001,"参数格式校验失败"),
+    Product_EXCEPTION(10002,"商品服务业务异常");
 
     private int code;
     private String msg;

@@ -42,6 +42,12 @@ public class CategoryBrandRelationController {
         return R.ok().put("data",data);
     }
 
+    @GetMapping("/brands/list")
+    public R listByCategoryId(Long catId){
+        List<PmsCategoryBrandRelationEntity> data = pmsCategoryBrandRelationService.list(new QueryWrapper<PmsCategoryBrandRelationEntity>().eq("catelog_id", catId));
+        return R.ok().put("data",data);
+    }
+
     /**
      * 列表
      */

@@ -2,6 +2,8 @@ package com.lzg.gulimall.product.service.impl;
 
 import org.springframework.stereotype.Service;
 import java.util.Map;
+import java.util.Objects;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -21,7 +23,8 @@ public class PmsSpuInfoServiceImpl extends ServiceImpl<PmsSpuInfoDao, PmsSpuInfo
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<PmsSpuInfoEntity> page = this.page(
                 new Query<PmsSpuInfoEntity>().getPage(params),
-                new QueryWrapper<PmsSpuInfoEntity>()
+                new QueryWrapper<PmsSpuInfoEntity>().eq(Objects.nonNull(params.get("brandId")),"brand_id",params.get("brandId"))
+                        .eq(Objects.nonNull(params.get("catelogId")),"catelog_id",params.get("catelogId")).like(Objects.nonNull(params.get("key")),"spu_name",params.get("key"))
         );
 
         return new PageUtils(page);

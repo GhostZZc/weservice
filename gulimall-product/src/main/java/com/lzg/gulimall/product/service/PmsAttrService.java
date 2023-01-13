@@ -17,8 +17,14 @@ import java.util.Map;
  */
 public interface PmsAttrService extends IService<PmsAttrEntity> {
 
+    AttrVo save(AttrVo attrVo);
+
+    AttrVo update(AttrVo attrVo);
+
     AttrVo getById(Long attrId);
 
     PageUtils queryPage(Map<String, Object> params, Long catelogId, AttrType attrType);
+
+
 }
 

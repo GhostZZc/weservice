@@ -2,7 +2,11 @@ package com.lzg.gulimall.product.dao;
 
 import com.lzg.gulimall.product.entity.AttrGroupEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lzg.gulimall.product.vo.AttrGroupAttrVo;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
 
 /**
  * 属性分组
@@ -14,4 +18,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PmsAttrGroupDao extends BaseMapper<AttrGroupEntity> {
 
+    List<AttrGroupAttrVo> seletByCateLogId(Long catelogId);
 }
