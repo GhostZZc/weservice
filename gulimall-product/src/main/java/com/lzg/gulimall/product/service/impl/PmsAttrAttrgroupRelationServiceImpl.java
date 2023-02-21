@@ -3,7 +3,11 @@ package com.lzg.gulimall.product.service.impl;
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.Query;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -25,6 +29,15 @@ public class PmsAttrAttrgroupRelationServiceImpl extends ServiceImpl<PmsAttrAttr
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public void removeItems(List<PmsAttrAttrgroupRelationEntity> items) {
+        for (PmsAttrAttrgroupRelationEntity item : items) {
+            if (Objects.nonNull(item)){
+                boolean remove = this.remove(new QueryWrapper<PmsAttrAttrgroupRelationEntity>(item));
+            }
+        }
     }
 
 }

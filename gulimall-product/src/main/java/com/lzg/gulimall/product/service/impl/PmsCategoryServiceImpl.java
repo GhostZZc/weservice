@@ -34,6 +34,12 @@ public class PmsCategoryServiceImpl extends ServiceImpl<PmsCategoryDao, Category
     }
 
     @Override
+    public List<CategoryEntity> getLevel1Categorys() {
+        List<CategoryEntity> categoryEntities = this.list(new QueryWrapper<CategoryEntity>().eq("parent_cid", 0));
+        return categoryEntities;
+    }
+
+    @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<CategoryEntity> page = this.page(
                 new Query<CategoryEntity>().getPage(params),

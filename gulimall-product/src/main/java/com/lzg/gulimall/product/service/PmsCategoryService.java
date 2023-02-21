@@ -21,6 +21,7 @@ public interface PmsCategoryService extends IService<CategoryEntity> {
 
     boolean removeByIds(List<Long> catIds);
 
+    List<CategoryEntity> getLevel1Categorys();
 
     List<CategoryVo> getCategoryTree();
 }
