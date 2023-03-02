@@ -1,6 +1,6 @@
 package com.lzg.gulimall.product.vo;
 
-import com.lzg.gulimall.product.entity.PmsAttrEntity;
+import com.lzg.gulimall.product.entity.AttrEntity;
 import lombok.Data;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * @date: 2023/1/5 14:05
  */
 @Data
-public class AttrVo extends PmsAttrEntity {
+public class AttrVo extends AttrEntity {
 
     private Long attrGroupId;
 

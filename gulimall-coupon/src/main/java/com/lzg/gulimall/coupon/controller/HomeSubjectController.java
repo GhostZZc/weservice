@@ -1,30 +1,23 @@
 package com.lzg.gulimall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.lzg.gulimall.coupon.entity.HomeSubjectEntity;
 import com.lzg.gulimall.coupon.service.HomeSubjectService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
  * 首页专题表【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】
  *
- * @author lzg
- * @email ${email}
- * @date 2022-12-15 10:03:29
+ * @author AdverseQ
+ * @email sunlightcs@gmail.com
+ * @date 2020-11-30 05:47:23
  */
 @RestController
 @RequestMapping("coupon/homesubject")
@@ -36,7 +29,7 @@ public class HomeSubjectController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("coupon:homesubject:list")
+    //@RequiresPermissions("coupon:homesubject:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = homeSubjectService.queryPage(params);
 
@@ -48,7 +41,7 @@ public class HomeSubjectController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("coupon:homesubject:info")
+    //@RequiresPermissions("coupon:homesubject:info")
     public R info(@PathVariable("id") Long id){
 		HomeSubjectEntity homeSubject = homeSubjectService.getById(id);
 
@@ -59,7 +52,7 @@ public class HomeSubjectController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("coupon:homesubject:save")
+    //@RequiresPermissions("coupon:homesubject:save")
     public R save(@RequestBody HomeSubjectEntity homeSubject){
 		homeSubjectService.save(homeSubject);
 
@@ -70,7 +63,7 @@ public class HomeSubjectController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("coupon:homesubject:update")
+    //@RequiresPermissions("coupon:homesubject:update")
     public R update(@RequestBody HomeSubjectEntity homeSubject){
 		homeSubjectService.updateById(homeSubject);
 
@@ -81,7 +74,7 @@ public class HomeSubjectController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("coupon:homesubject:delete")
+    //@RequiresPermissions("coupon:homesubject:delete")
     public R delete(@RequestBody Long[] ids){
 		homeSubjectService.removeByIds(Arrays.asList(ids));
 

@@ -2,8 +2,8 @@ package com.lzg.gulimall.product.controller.app;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.entity.PmsSkuInfoEntity;
-import com.lzg.gulimall.product.service.PmsSkuInfoService;
+import com.lzg.gulimall.product.entity.SkuInfoEntity;
+import com.lzg.gulimall.product.service.ISkuInfoService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("product/skuinfo")
 public class SkuInfoController {
     @Autowired
-    private PmsSkuInfoService pmsSkuInfoService;
+    private ISkuInfoService pmsSkuInfoService;
 
     /**
      * 列表
@@ -43,7 +43,7 @@ public class SkuInfoController {
     @RequestMapping("/info/{skuId}")
     @RequiresPermissions("product:pmsskuinfo:info")
     public R info(@PathVariable("skuId") Long skuId){
-		PmsSkuInfoEntity pmsSkuInfo = pmsSkuInfoService.getById(skuId);
+		SkuInfoEntity pmsSkuInfo = pmsSkuInfoService.getById(skuId);
 
         return R.ok().put("pmsSkuInfo", pmsSkuInfo);
     }
@@ -53,7 +53,7 @@ public class SkuInfoController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmsskuinfo:save")
-    public R save(@RequestBody PmsSkuInfoEntity pmsSkuInfo){
+    public R save(@RequestBody SkuInfoEntity pmsSkuInfo){
 		pmsSkuInfoService.save(pmsSkuInfo);
 
         return R.ok();
@@ -64,7 +64,7 @@ public class SkuInfoController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmsskuinfo:update")
-    public R update(@RequestBody PmsSkuInfoEntity pmsSkuInfo){
+    public R update(@RequestBody SkuInfoEntity pmsSkuInfo){
 		pmsSkuInfoService.updateById(pmsSkuInfo);
 
         return R.ok();
@@ -80,5 +80,7 @@ public class SkuInfoController {
 
         return R.ok();
     }
+
+    //todo 差一个接口
 
 }

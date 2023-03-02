@@ -2,18 +2,17 @@ package com.lzg.gulimall.coupon.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 秒杀活动商品关联
- * 
- * @author lzg
- * @email ${email}
- * @date 2022-12-15 10:03:29
+ *
+ * @author AdverseQ
+ * @email sunlightcs@gmail.com
+ * @date 2020-11-30 05:47:23
  */
 @Data
 @TableName("sms_seckill_sku_relation")
@@ -48,7 +47,7 @@ public class SeckillSkuRelationEntity implements Serializable {
 	/**
 	 * 每人限购数量
 	 */
-	private BigDecimal seckillLimit;
+	private int seckillLimit;
 	/**
 	 * 排序
 	 */

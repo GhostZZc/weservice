@@ -3,8 +3,8 @@ package com.lzg.gulimall.product.controller.app;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.entity.PmsCategoryBrandRelationEntity;
-import com.lzg.gulimall.product.service.PmsCategoryBrandRelationService;
+import com.lzg.gulimall.product.entity.CategoryBrandRelationEntity;
+import com.lzg.gulimall.product.service.ICategoryBrandRelationService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,7 @@ import java.util.Map;
 @RequestMapping("product/categorybrandrelation")
 public class CategoryBrandRelationController {
     @Autowired
-    private PmsCategoryBrandRelationService pmsCategoryBrandRelationService;
+    private ICategoryBrandRelationService pmsCategoryBrandRelationService;
 
     /**
      * 获取品牌关联的全部分类列表
@@ -34,13 +34,13 @@ public class CategoryBrandRelationController {
      */
     @GetMapping("/catelog/list")
     public R listByBrandId(Long brandId){
-        List<PmsCategoryBrandRelationEntity> data = pmsCategoryBrandRelationService.list(new QueryWrapper<PmsCategoryBrandRelationEntity>().eq("brand_id", brandId));
+        List<CategoryBrandRelationEntity> data = pmsCategoryBrandRelationService.list(new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id", brandId));
         return R.ok().put("data",data);
     }
 
     @GetMapping("/brands/list")
     public R listByCategoryId(Long catId){
-        List<PmsCategoryBrandRelationEntity> data = pmsCategoryBrandRelationService.list(new QueryWrapper<PmsCategoryBrandRelationEntity>().eq("catelog_id", catId));
+        List<CategoryBrandRelationEntity> data = pmsCategoryBrandRelationService.list(new QueryWrapper<CategoryBrandRelationEntity>().eq("catelog_id", catId));
         return R.ok().put("data",data);
     }
 
@@ -62,7 +62,7 @@ public class CategoryBrandRelationController {
     @RequestMapping("/info/{id}")
     @RequiresPermissions("product:pmscategorybrandrelation:info")
     public R info(@PathVariable("id") Long id){
-		PmsCategoryBrandRelationEntity pmsCategoryBrandRelation = pmsCategoryBrandRelationService.getById(id);
+		CategoryBrandRelationEntity pmsCategoryBrandRelation = pmsCategoryBrandRelationService.getById(id);
 
         return R.ok().put("pmsCategoryBrandRelation", pmsCategoryBrandRelation);
     }
@@ -72,7 +72,7 @@ public class CategoryBrandRelationController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmscategorybrandrelation:save")
-    public R save(@RequestBody PmsCategoryBrandRelationEntity pmsCategoryBrandRelation){
+    public R save(@RequestBody CategoryBrandRelationEntity pmsCategoryBrandRelation){
 		pmsCategoryBrandRelationService.saveCategoryBrandRelation(pmsCategoryBrandRelation);
         return R.ok();
     }
@@ -82,7 +82,7 @@ public class CategoryBrandRelationController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmscategorybrandrelation:update")
-    public R update(@RequestBody PmsCategoryBrandRelationEntity pmsCategoryBrandRelation){
+    public R update(@RequestBody CategoryBrandRelationEntity pmsCategoryBrandRelation){
 		pmsCategoryBrandRelationService.updateById(pmsCategoryBrandRelation);
 
         return R.ok();

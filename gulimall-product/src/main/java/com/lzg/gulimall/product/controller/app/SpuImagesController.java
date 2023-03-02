@@ -2,8 +2,8 @@ package com.lzg.gulimall.product.controller.app;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.entity.PmsSpuImagesEntity;
-import com.lzg.gulimall.product.service.PmsSpuImagesService;
+import com.lzg.gulimall.product.entity.SpuImagesEntity;
+import com.lzg.gulimall.product.service.ISpuImagesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("product/spuimages")
 public class SpuImagesController {
     @Autowired
-    private PmsSpuImagesService pmsSpuImagesService;
+    private ISpuImagesService pmsSpuImagesService;
 
     /**
      * 列表
@@ -43,9 +43,9 @@ public class SpuImagesController {
     @RequestMapping("/info/{id}")
     @RequiresPermissions("product:pmsspuimages:info")
     public R info(@PathVariable("id") Long id){
-		PmsSpuImagesEntity pmsSpuImages = pmsSpuImagesService.getById(id);
+		SpuImagesEntity pmsSpuImages = pmsSpuImagesService.getById(id);
 
-        return R.ok().put("pmsSpuImages", pmsSpuImages);
+        return R.ok().put("spuImages", pmsSpuImages);
     }
 
     /**
@@ -53,7 +53,7 @@ public class SpuImagesController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmsspuimages:save")
-    public R save(@RequestBody PmsSpuImagesEntity pmsSpuImages){
+    public R save(@RequestBody SpuImagesEntity pmsSpuImages){
 		pmsSpuImagesService.save(pmsSpuImages);
 
         return R.ok();
@@ -64,7 +64,7 @@ public class SpuImagesController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmsspuimages:update")
-    public R update(@RequestBody PmsSpuImagesEntity pmsSpuImages){
+    public R update(@RequestBody SpuImagesEntity pmsSpuImages){
 		pmsSpuImagesService.updateById(pmsSpuImages);
 
         return R.ok();

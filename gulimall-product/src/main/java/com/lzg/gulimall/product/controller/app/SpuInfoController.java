@@ -2,8 +2,9 @@ package com.lzg.gulimall.product.controller.app;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.entity.PmsSpuInfoEntity;
-import com.lzg.gulimall.product.service.PmsSpuInfoService;
+import com.lzg.gulimall.product.entity.SpuInfoEntity;
+import com.lzg.gulimall.product.service.ISpuInfoService;
+import com.lzg.gulimall.product.vo.spvsavevo.SpuSaveVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ import java.util.Map;
 @RequestMapping("product/spuinfo")
 public class SpuInfoController {
     @Autowired
-    private PmsSpuInfoService pmsSpuInfoService;
+    private ISpuInfoService pmsSpuInfoService;
 
     /**
      * 列表
@@ -43,7 +44,7 @@ public class SpuInfoController {
     @RequestMapping("/info/{id}")
     @RequiresPermissions("product:pmsspuinfo:info")
     public R info(@PathVariable("id") Long id){
-		PmsSpuInfoEntity pmsSpuInfo = pmsSpuInfoService.getById(id);
+		SpuInfoEntity pmsSpuInfo = pmsSpuInfoService.getById(id);
 
         return R.ok().put("pmsSpuInfo", pmsSpuInfo);
     }
@@ -53,8 +54,8 @@ public class SpuInfoController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmsspuinfo:save")
-    public R save(@RequestBody PmsSpuInfoEntity pmsSpuInfo){
-		pmsSpuInfoService.save(pmsSpuInfo);
+    public R save(@RequestBody SpuSaveVo spuSaveVo){
+		pmsSpuInfoService.saveSpuVo(spuSaveVo);
 
         return R.ok();
     }
@@ -64,7 +65,7 @@ public class SpuInfoController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmsspuinfo:update")
-    public R update(@RequestBody PmsSpuInfoEntity pmsSpuInfo){
+    public R update(@RequestBody SpuInfoEntity pmsSpuInfo){
 		pmsSpuInfoService.updateById(pmsSpuInfo);
 
         return R.ok();
@@ -80,5 +81,8 @@ public class SpuInfoController {
 
         return R.ok();
     }
+
+
+    //todo  差2个接口
 
 }

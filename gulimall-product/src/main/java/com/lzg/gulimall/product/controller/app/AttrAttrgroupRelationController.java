@@ -2,8 +2,8 @@ package com.lzg.gulimall.product.controller.app;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.entity.PmsAttrAttrgroupRelationEntity;
-import com.lzg.gulimall.product.service.PmsAttrAttrgroupRelationService;
+import com.lzg.gulimall.product.entity.AttrAttrgroupRelationEntity;
+import com.lzg.gulimall.product.service.IAttrAttrgroupRelationService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("product/attrattrgrouprelation")
 public class AttrAttrgroupRelationController {
     @Autowired
-    private PmsAttrAttrgroupRelationService pmsAttrAttrgroupRelationService;
+    private IAttrAttrgroupRelationService pmsAttrAttrgroupRelationService;
 
     /**
      * 列表
@@ -43,7 +43,7 @@ public class AttrAttrgroupRelationController {
     @RequestMapping("/info/{id}")
     @RequiresPermissions("product:pmsattrattrgrouprelation:info")
     public R info(@PathVariable("id") Long id){
-		PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRelation = pmsAttrAttrgroupRelationService.getById(id);
+		AttrAttrgroupRelationEntity pmsAttrAttrgroupRelation = pmsAttrAttrgroupRelationService.getById(id);
 
         return R.ok().put("pmsAttrAttrgroupRelation", pmsAttrAttrgroupRelation);
     }
@@ -53,7 +53,7 @@ public class AttrAttrgroupRelationController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmsattrattrgrouprelation:save")
-    public R save(@RequestBody PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRelation){
+    public R save(@RequestBody AttrAttrgroupRelationEntity pmsAttrAttrgroupRelation){
 		pmsAttrAttrgroupRelationService.save(pmsAttrAttrgroupRelation);
 
         return R.ok();
@@ -64,7 +64,7 @@ public class AttrAttrgroupRelationController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmsattrattrgrouprelation:update")
-    public R update(@RequestBody PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRelation){
+    public R update(@RequestBody AttrAttrgroupRelationEntity pmsAttrAttrgroupRelation){
 		pmsAttrAttrgroupRelationService.updateById(pmsAttrAttrgroupRelation);
 
         return R.ok();

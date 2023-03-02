@@ -2,8 +2,8 @@ package com.lzg.gulimall.product.controller.app;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.entity.PmsProductAttrValueEntity;
-import com.lzg.gulimall.product.service.PmsProductAttrValueService;
+import com.lzg.gulimall.product.entity.ProductAttrValueEntity;
+import com.lzg.gulimall.product.service.IProductAttrValueService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("product/productattrvalue")
 public class ProductAttrValueController {
     @Autowired
-    private PmsProductAttrValueService pmsProductAttrValueService;
+    private IProductAttrValueService pmsProductAttrValueService;
 
     /**
      * 列表
@@ -43,7 +43,7 @@ public class ProductAttrValueController {
     @RequestMapping("/info/{id}")
     @RequiresPermissions("product:pmsproductattrvalue:info")
     public R info(@PathVariable("id") Long id){
-		PmsProductAttrValueEntity pmsProductAttrValue = pmsProductAttrValueService.getById(id);
+		ProductAttrValueEntity pmsProductAttrValue = pmsProductAttrValueService.getById(id);
 
         return R.ok().put("pmsProductAttrValue", pmsProductAttrValue);
     }
@@ -53,7 +53,7 @@ public class ProductAttrValueController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmsproductattrvalue:save")
-    public R save(@RequestBody PmsProductAttrValueEntity pmsProductAttrValue){
+    public R save(@RequestBody ProductAttrValueEntity pmsProductAttrValue){
 		pmsProductAttrValueService.save(pmsProductAttrValue);
 
         return R.ok();
@@ -64,7 +64,7 @@ public class ProductAttrValueController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmsproductattrvalue:update")
-    public R update(@RequestBody PmsProductAttrValueEntity pmsProductAttrValue){
+    public R update(@RequestBody ProductAttrValueEntity pmsProductAttrValue){
 		pmsProductAttrValueService.updateById(pmsProductAttrValue);
 
         return R.ok();

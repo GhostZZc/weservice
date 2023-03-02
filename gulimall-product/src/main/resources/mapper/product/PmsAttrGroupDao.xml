@@ -43,7 +43,7 @@
         <result column="sort" property="sort"/>
         <result column="page.icon" property="icon"/>
         <result column="pag.catelog_id" property="catelogId"/>
-        <association property="attrs" javaType="com.lzg.gulimall.product.entity.PmsAttrEntity">
+        <association property="attrs" javaType="com.lzg.gulimall.product.entity.AttrEntity">
             <result column="attr_id" property="attrId"/>
             <result column="attr_name" property="attrName"/>
             <result column="search_type" property="searchType"/>

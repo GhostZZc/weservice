@@ -1,7 +1,7 @@
 package com.lzg.gulimall.product.vo;
 
 import com.lzg.gulimall.product.entity.AttrGroupEntity;
-import com.lzg.gulimall.product.entity.PmsAttrEntity;
+import com.lzg.gulimall.product.entity.AttrEntity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -18,5 +18,5 @@ import java.util.List;
 public class AttrGroupAttrVo extends AttrGroupEntity {
 
 
-    private List<PmsAttrEntity> attrs;
+    private List<AttrEntity> attrs;
 }

@@ -2,8 +2,8 @@ package com.lzg.gulimall.product.controller.app;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.entity.PmsSpuCommentEntity;
-import com.lzg.gulimall.product.service.PmsSpuCommentService;
+import com.lzg.gulimall.product.entity.SpuCommentEntity;
+import com.lzg.gulimall.product.service.ISpuCommentService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("product/spucomment")
 public class SpuCommentController {
     @Autowired
-    private PmsSpuCommentService pmsSpuCommentService;
+    private ISpuCommentService pmsSpuCommentService;
 
     /**
      * 列表
@@ -43,7 +43,7 @@ public class SpuCommentController {
     @RequestMapping("/info/{id}")
     @RequiresPermissions("product:pmsspucomment:info")
     public R info(@PathVariable("id") Long id){
-		PmsSpuCommentEntity pmsSpuComment = pmsSpuCommentService.getById(id);
+		SpuCommentEntity pmsSpuComment = pmsSpuCommentService.getById(id);
 
         return R.ok().put("pmsSpuComment", pmsSpuComment);
     }
@@ -53,7 +53,7 @@ public class SpuCommentController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmsspucomment:save")
-    public R save(@RequestBody PmsSpuCommentEntity pmsSpuComment){
+    public R save(@RequestBody SpuCommentEntity pmsSpuComment){
 		pmsSpuCommentService.save(pmsSpuComment);
 
         return R.ok();
@@ -64,7 +64,7 @@ public class SpuCommentController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmsspucomment:update")
-    public R update(@RequestBody PmsSpuCommentEntity pmsSpuComment){
+    public R update(@RequestBody SpuCommentEntity pmsSpuComment){
 		pmsSpuCommentService.updateById(pmsSpuComment);
 
         return R.ok();

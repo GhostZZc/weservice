@@ -2,8 +2,8 @@ package com.lzg.gulimall.product.controller.app;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.entity.PmsSkuImagesEntity;
-import com.lzg.gulimall.product.service.PmsSkuImagesService;
+import com.lzg.gulimall.product.entity.SkuImagesEntity;
+import com.lzg.gulimall.product.service.ISkuImagesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("product/skuimages")
 public class SkuImagesController {
     @Autowired
-    private PmsSkuImagesService pmsSkuImagesService;
+    private ISkuImagesService pmsSkuImagesService;
 
     /**
      * 列表
@@ -43,7 +43,7 @@ public class SkuImagesController {
     @RequestMapping("/info/{id}")
     @RequiresPermissions("product:pmsskuimages:info")
     public R info(@PathVariable("id") Long id){
-		PmsSkuImagesEntity pmsSkuImages = pmsSkuImagesService.getById(id);
+		SkuImagesEntity pmsSkuImages = pmsSkuImagesService.getById(id);
 
         return R.ok().put("pmsSkuImages", pmsSkuImages);
     }
@@ -53,7 +53,7 @@ public class SkuImagesController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmsskuimages:save")
-    public R save(@RequestBody PmsSkuImagesEntity pmsSkuImages){
+    public R save(@RequestBody SkuImagesEntity pmsSkuImages){
 		pmsSkuImagesService.save(pmsSkuImages);
 
         return R.ok();
@@ -64,7 +64,7 @@ public class SkuImagesController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmsskuimages:update")
-    public R update(@RequestBody PmsSkuImagesEntity pmsSkuImages){
+    public R update(@RequestBody SkuImagesEntity pmsSkuImages){
 		pmsSkuImagesService.updateById(pmsSkuImages);
 
         return R.ok();

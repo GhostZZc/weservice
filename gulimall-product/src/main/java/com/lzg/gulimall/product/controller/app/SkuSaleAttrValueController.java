@@ -2,8 +2,8 @@ package com.lzg.gulimall.product.controller.app;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.entity.PmsSkuSaleAttrValueEntity;
-import com.lzg.gulimall.product.service.PmsSkuSaleAttrValueService;
+import com.lzg.gulimall.product.entity.SkuSaleAttrValueEntity;
+import com.lzg.gulimall.product.service.ISkuSaleAttrValueService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +23,10 @@ import java.util.Map;
 @RequestMapping("product/skusaleattrvalue")
 public class SkuSaleAttrValueController {
     @Autowired
-    private PmsSkuSaleAttrValueService pmsSkuSaleAttrValueService;
+    private ISkuSaleAttrValueService pmsSkuSaleAttrValueService;
 
+
+    //todo 差一个接口
     /**
      * 列表
      */
@@ -43,7 +45,7 @@ public class SkuSaleAttrValueController {
     @RequestMapping("/info/{id}")
     @RequiresPermissions("product:pmsskusaleattrvalue:info")
     public R info(@PathVariable("id") Long id){
-		PmsSkuSaleAttrValueEntity pmsSkuSaleAttrValue = pmsSkuSaleAttrValueService.getById(id);
+		SkuSaleAttrValueEntity pmsSkuSaleAttrValue = pmsSkuSaleAttrValueService.getById(id);
 
         return R.ok().put("pmsSkuSaleAttrValue", pmsSkuSaleAttrValue);
     }
@@ -53,7 +55,7 @@ public class SkuSaleAttrValueController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmsskusaleattrvalue:save")
-    public R save(@RequestBody PmsSkuSaleAttrValueEntity pmsSkuSaleAttrValue){
+    public R save(@RequestBody SkuSaleAttrValueEntity pmsSkuSaleAttrValue){
 		pmsSkuSaleAttrValueService.save(pmsSkuSaleAttrValue);
 
         return R.ok();
@@ -64,7 +66,7 @@ public class SkuSaleAttrValueController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmsskusaleattrvalue:update")
-    public R update(@RequestBody PmsSkuSaleAttrValueEntity pmsSkuSaleAttrValue){
+    public R update(@RequestBody SkuSaleAttrValueEntity pmsSkuSaleAttrValue){
 		pmsSkuSaleAttrValueService.updateById(pmsSkuSaleAttrValue);
 
         return R.ok();

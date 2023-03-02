@@ -3,7 +3,7 @@ package com.lzg.gulimall.product.controller.app;
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
 import com.lzg.gulimall.product.entity.CategoryEntity;
-import com.lzg.gulimall.product.service.PmsCategoryService;
+import com.lzg.gulimall.product.service.ICategoryService;
 import com.lzg.gulimall.product.vo.CategoryVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import java.util.Map;
 @RequestMapping("product/category")
 public class CategoryController {
     @Autowired
-    private PmsCategoryService pmsCategoryService;
+    private ICategoryService pmsCategoryService;
 
     /**
      * 列表

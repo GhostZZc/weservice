@@ -1,7 +1,7 @@
 package com.lzg.gulimall.product.controller.web;
 
 import com.lzg.gulimall.product.entity.CategoryEntity;
-import com.lzg.gulimall.product.service.PmsCategoryService;
+import com.lzg.gulimall.product.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import java.util.List;
 public class IndexController {
 
     @Autowired
-    PmsCategoryService categoryService;
+    ICategoryService categoryService;
 
     @GetMapping({"/","/index.html"})
     public String indexPage(Model model){

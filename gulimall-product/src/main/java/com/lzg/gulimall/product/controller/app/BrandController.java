@@ -3,14 +3,12 @@ package com.lzg.gulimall.product.controller.app;
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
 import com.lzg.gulimall.product.entity.BrandEntity;
-import com.lzg.gulimall.product.entity.PmsAttrEntity;
-import com.lzg.gulimall.product.service.PmsBrandService;
+import com.lzg.gulimall.product.service.IBrandService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 
@@ -25,7 +23,7 @@ import java.util.Map;
 @RequestMapping("product/brand")
 public class BrandController {
     @Autowired
-    private PmsBrandService pmsBrandService;
+    private IBrandService pmsBrandService;
 
     /**
      * 列表

@@ -3,10 +3,10 @@ package com.lzg.gulimall.product.controller.app;
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
 import com.lzg.gulimall.product.entity.AttrGroupEntity;
-import com.lzg.gulimall.product.entity.PmsAttrAttrgroupRelationEntity;
-import com.lzg.gulimall.product.entity.PmsAttrEntity;
-import com.lzg.gulimall.product.service.PmsAttrAttrgroupRelationService;
-import com.lzg.gulimall.product.service.PmsAttrGroupService;
+import com.lzg.gulimall.product.entity.AttrAttrgroupRelationEntity;
+import com.lzg.gulimall.product.entity.AttrEntity;
+import com.lzg.gulimall.product.service.IAttrAttrgroupRelationService;
+import com.lzg.gulimall.product.service.IAttrGroupService;
 import com.lzg.gulimall.product.vo.AttrGroupAttrVo;
 import com.lzg.gulimall.product.vo.AttrGroupVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -30,9 +30,9 @@ import java.util.Objects;
 @RequestMapping("product/attrgroup")
 public class AttrGroupController {
     @Autowired
-    private PmsAttrGroupService pmsAttrGroupService;
+    private IAttrGroupService pmsAttrGroupService;
     @Autowired
-    private PmsAttrAttrgroupRelationService pmsAttrAttrgroupRelationService;
+    private IAttrAttrgroupRelationService pmsAttrAttrgroupRelationService;
 
     /**
      * 列表
@@ -47,7 +47,7 @@ public class AttrGroupController {
 
     @GetMapping("{attrgroupId}/attr/relation")
     public R getAttrByAttrgroupId(@PathVariable Long attrgroupId){
-        List<PmsAttrEntity> attrByAttrGroupId = pmsAttrGroupService.getAttrByAttrGroupId(attrgroupId);
+        List<AttrEntity> attrByAttrGroupId = pmsAttrGroupService.getAttrByAttrGroupId(attrgroupId);
         return R.ok().put("data",attrByAttrGroupId);
     }
 
@@ -94,14 +94,14 @@ public class AttrGroupController {
      */
     @RequestMapping("/attr/relation")
     @RequiresPermissions("product:pmsattrattrgrouprelation:save")
-    public R saveRelation(@RequestBody List<PmsAttrAttrgroupRelationEntity> items){
+    public R saveRelation(@RequestBody List<AttrAttrgroupRelationEntity> items){
         pmsAttrAttrgroupRelationService.saveBatch(items);
 
         return R.ok();
     }
 
     @PostMapping("/attr/relation/delete")
-    public R deleteRelation(@RequestBody List<PmsAttrAttrgroupRelationEntity> items){
+    public R deleteRelation(@RequestBody List<AttrAttrgroupRelationEntity> items){
         pmsAttrAttrgroupRelationService.removeItems(items);
         return R.ok();
     }

@@ -2,8 +2,8 @@ package com.lzg.gulimall.product.controller.app;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.entity.PmsCommentReplayEntity;
-import com.lzg.gulimall.product.service.PmsCommentReplayService;
+import com.lzg.gulimall.product.entity.CommentReplayEntity;
+import com.lzg.gulimall.product.service.ICommentReplayService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("product/commentreplay")
 public class CommentReplayController {
     @Autowired
-    private PmsCommentReplayService pmsCommentReplayService;
+    private ICommentReplayService pmsCommentReplayService;
 
     /**
      * 列表
@@ -43,7 +43,7 @@ public class CommentReplayController {
     @RequestMapping("/info/{id}")
     @RequiresPermissions("product:pmscommentreplay:info")
     public R info(@PathVariable("id") Long id){
-		PmsCommentReplayEntity pmsCommentReplay = pmsCommentReplayService.getById(id);
+		CommentReplayEntity pmsCommentReplay = pmsCommentReplayService.getById(id);
 
         return R.ok().put("pmsCommentReplay", pmsCommentReplay);
     }
@@ -53,7 +53,7 @@ public class CommentReplayController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmscommentreplay:save")
-    public R save(@RequestBody PmsCommentReplayEntity pmsCommentReplay){
+    public R save(@RequestBody CommentReplayEntity pmsCommentReplay){
 		pmsCommentReplayService.save(pmsCommentReplay);
 
         return R.ok();
@@ -64,7 +64,7 @@ public class CommentReplayController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmscommentreplay:update")
-    public R update(@RequestBody PmsCommentReplayEntity pmsCommentReplay){
+    public R update(@RequestBody CommentReplayEntity pmsCommentReplay){
 		pmsCommentReplayService.updateById(pmsCommentReplay);
 
         return R.ok();

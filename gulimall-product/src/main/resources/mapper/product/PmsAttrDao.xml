@@ -4,7 +4,7 @@
 <mapper namespace="com.lzg.gulimall.product.dao.PmsAttrDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.lzg.gulimall.product.entity.PmsAttrEntity" id="pmsAttrMap">
+    <resultMap type="com.lzg.gulimall.product.entity.AttrEntity" id="pmsAttrMap">
         <result property="attrId" column="attr_id"/>
         <result property="attrName" column="attr_name"/>
         <result property="searchType" column="search_type"/>

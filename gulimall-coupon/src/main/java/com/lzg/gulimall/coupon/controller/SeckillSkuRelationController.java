@@ -1,30 +1,23 @@
 package com.lzg.gulimall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.lzg.gulimall.coupon.entity.SeckillSkuRelationEntity;
 import com.lzg.gulimall.coupon.service.SeckillSkuRelationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
  * 秒杀活动商品关联
  *
- * @author lzg
- * @email ${email}
- * @date 2022-12-15 10:03:29
+ * @author AdverseQ
+ * @email sunlightcs@gmail.com
+ * @date 2020-11-30 05:47:23
  */
 @RestController
 @RequestMapping("coupon/seckillskurelation")
@@ -36,7 +29,7 @@ public class SeckillSkuRelationController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("coupon:seckillskurelation:list")
+    //@RequiresPermissions("coupon:seckillskurelation:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = seckillSkuRelationService.queryPage(params);
 
@@ -48,7 +41,7 @@ public class SeckillSkuRelationController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("coupon:seckillskurelation:info")
+    //@RequiresPermissions("coupon:seckillskurelation:info")
     public R info(@PathVariable("id") Long id){
 		SeckillSkuRelationEntity seckillSkuRelation = seckillSkuRelationService.getById(id);
 
@@ -59,7 +52,7 @@ public class SeckillSkuRelationController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("coupon:seckillskurelation:save")
+    //@RequiresPermissions("coupon:seckillskurelation:save")
     public R save(@RequestBody SeckillSkuRelationEntity seckillSkuRelation){
 		seckillSkuRelationService.save(seckillSkuRelation);
 
@@ -70,7 +63,7 @@ public class SeckillSkuRelationController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("coupon:seckillskurelation:update")
+    //@RequiresPermissions("coupon:seckillskurelation:update")
     public R update(@RequestBody SeckillSkuRelationEntity seckillSkuRelation){
 		seckillSkuRelationService.updateById(seckillSkuRelation);
 
@@ -81,7 +74,7 @@ public class SeckillSkuRelationController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("coupon:seckillskurelation:delete")
+    //@RequiresPermissions("coupon:seckillskurelation:delete")
     public R delete(@RequestBody Long[] ids){
 		seckillSkuRelationService.removeByIds(Arrays.asList(ids));
 

@@ -1,7 +1,7 @@
 package com.lzg.gulimall.product.test;
 
 import com.lzg.gulimall.product.entity.BrandEntity;
-import com.lzg.gulimall.product.service.PmsBrandService;
+import com.lzg.gulimall.product.service.IBrandService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class GulimallProductTest {
 
     @Autowired
-    PmsBrandService brandService;
+    IBrandService brandService;
 
     @Test
     void contextLoads() {

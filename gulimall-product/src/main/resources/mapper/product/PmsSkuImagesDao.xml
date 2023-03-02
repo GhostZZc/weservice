@@ -4,7 +4,7 @@
 <mapper namespace="com.lzg.gulimall.product.dao.PmsSkuImagesDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.lzg.gulimall.product.entity.PmsSkuImagesEntity" id="pmsSkuImagesMap">
+    <resultMap type="com.lzg.gulimall.product.entity.SkuImagesEntity" id="pmsSkuImagesMap">
         <result property="id" column="id"/>
         <result property="skuId" column="sku_id"/>
         <result property="imgUrl" column="img_url"/>

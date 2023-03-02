@@ -2,7 +2,7 @@ package com.lzg.gulimall.product.controller.app;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.service.PmsAttrService;
+import com.lzg.gulimall.product.service.IAttrService;
 import com.lzg.gulimall.product.utils.AttrType;
 import com.lzg.gulimall.product.vo.AttrVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -24,7 +24,7 @@ import java.util.Map;
 @RequestMapping("product/attr")
 public class AttrController {
     @Autowired
-    private PmsAttrService pmsAttrService;
+    private IAttrService pmsAttrService;
 
     /**
      * 规格参数列表

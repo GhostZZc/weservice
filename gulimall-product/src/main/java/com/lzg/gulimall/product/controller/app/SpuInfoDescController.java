@@ -2,8 +2,8 @@ package com.lzg.gulimall.product.controller.app;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
-import com.lzg.gulimall.product.entity.PmsSpuInfoDescEntity;
-import com.lzg.gulimall.product.service.PmsSpuInfoDescService;
+import com.lzg.gulimall.product.entity.SpuInfoDescEntity;
+import com.lzg.gulimall.product.service.ISpuInfoDescService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("product/spuinfodesc")
 public class SpuInfoDescController {
     @Autowired
-    private PmsSpuInfoDescService pmsSpuInfoDescService;
+    private ISpuInfoDescService pmsSpuInfoDescService;
 
     /**
      * 列表
@@ -43,7 +43,7 @@ public class SpuInfoDescController {
     @RequestMapping("/info/{spuId}")
     @RequiresPermissions("product:pmsspuinfodesc:info")
     public R info(@PathVariable("spuId") Long spuId){
-		PmsSpuInfoDescEntity pmsSpuInfoDesc = pmsSpuInfoDescService.getById(spuId);
+		SpuInfoDescEntity pmsSpuInfoDesc = pmsSpuInfoDescService.getById(spuId);
 
         return R.ok().put("pmsSpuInfoDesc", pmsSpuInfoDesc);
     }
@@ -53,7 +53,7 @@ public class SpuInfoDescController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("product:pmsspuinfodesc:save")
-    public R save(@RequestBody PmsSpuInfoDescEntity pmsSpuInfoDesc){
+    public R save(@RequestBody SpuInfoDescEntity pmsSpuInfoDesc){
 		pmsSpuInfoDescService.save(pmsSpuInfoDesc);
 
         return R.ok();
@@ -64,7 +64,7 @@ public class SpuInfoDescController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("product:pmsspuinfodesc:update")
-    public R update(@RequestBody PmsSpuInfoDescEntity pmsSpuInfoDesc){
+    public R update(@RequestBody SpuInfoDescEntity pmsSpuInfoDesc){
 		pmsSpuInfoDescService.updateById(pmsSpuInfoDesc);
 
         return R.ok();
