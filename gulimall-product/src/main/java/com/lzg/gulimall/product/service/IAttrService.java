@@ -6,6 +6,7 @@ import com.lzg.gulimall.product.entity.AttrEntity;
 import com.lzg.gulimall.product.utils.AttrType;
 import com.lzg.gulimall.product.vo.AttrVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +25,8 @@ public interface IAttrService extends IService<AttrEntity> {
     AttrVo getById(Long attrId);
 
     PageUtils queryPage(Map<String, Object> params, Long catelogId, AttrType attrType);
+
+    List<Long> getSearchableByAttrId(List<Long> attrIds);
 
 
 }

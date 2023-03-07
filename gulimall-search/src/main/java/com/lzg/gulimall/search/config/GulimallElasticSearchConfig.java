@@ -27,7 +27,7 @@ public class GulimallElasticSearchConfig {
     public RestHighLevelClient esRestClient() {
         RestClientBuilder builder = null;
         // 可以指定多个es
-        builder = RestClient.builder(new HttpHost("192.168.110.85",9200,"http"));
+        builder = RestClient.builder(new HttpHost("localhost",9200,"http"));
         RestHighLevelClient client = new RestHighLevelClient(builder);
         return client;
     }

@@ -22,7 +22,7 @@ public class SpuSaveVo {
     private String spuName;
     private String spuDescription;
     @NotEmpty(groups = {AddGroup.class})
-    private Long catalogId;
+    private Long catelogId;
     @NotEmpty(groups = {AddGroup.class})
     private Long brandId;
     private double weight;

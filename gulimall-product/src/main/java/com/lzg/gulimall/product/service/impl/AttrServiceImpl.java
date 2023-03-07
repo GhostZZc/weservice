@@ -57,13 +57,14 @@ public class AttrServiceImpl extends ServiceImpl<PmsAttrDao, AttrEntity> impleme
         if (!save) {
             throw new ProductException("属性保存失败");
         }
-        AttrAttrgroupRelationEntity relation = new AttrAttrgroupRelationEntity();
-        relation.setAttrId(attrVo.getAttrId()).setAttrGroupId(attrVo.getAttrGroupId());
-        int insert = attrGroupDao.insert(relation);
-        if (insert<1){
-            throw new ProductException("属性保存失败");
+        if (Objects.nonNull(attrVo.getAttrGroupId())){
+            AttrAttrgroupRelationEntity relation = new AttrAttrgroupRelationEntity();
+            relation.setAttrId(attr.getAttrId()).setAttrGroupId(attrVo.getAttrGroupId());
+            int insert = attrGroupDao.insert(relation);
+            if (insert<1){
+                throw new ProductException("属性保存失败");
+            }
         }
-
         return attrVo;
     }
 
@@ -132,6 +133,12 @@ public class AttrServiceImpl extends ServiceImpl<PmsAttrDao, AttrEntity> impleme
         BeanUtils.copyProperties(page, tarPage, "records");
         tarPage.setRecords(tarList);
         return new PageUtils(tarPage);
+    }
+
+    @Override
+    public List<Long> getSearchableByAttrId(List<Long> attrIds) {
+
+        return baseMapper.filterAttrIdsSearchAble(attrIds);
     }
 
 }

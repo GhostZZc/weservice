@@ -1,5 +1,6 @@
 package com.lzg.gulimall.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -18,7 +19,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @TableName("pms_spu_info")
-@Accessors(chain = true)
+
 public class SpuInfoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 

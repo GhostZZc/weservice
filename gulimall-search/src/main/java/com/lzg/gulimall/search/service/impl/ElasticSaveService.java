@@ -4,12 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.lzg.gulimall.common.to.es.SkuEsModel;
 import com.lzg.gulimall.search.GulimallSearchApplication;
 import com.lzg.gulimall.search.config.GulimallElasticSearchConfig;
+import com.lzg.gulimall.search.constant.EsConstant;
 import com.lzg.gulimall.search.service.IElasticSaveService;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,16 +39,19 @@ public class ElasticSaveService implements IElasticSaveService {
      * @throws IOException
      */
     @Override
-    public Boolean saveProductToElastic(List<SkuEsModel> skuEsModels) throws IOException {
+    public Boolean saveProductToElasticHasFail(List<SkuEsModel> skuEsModels) throws IOException {
         BulkRequest bulkRequest = new BulkRequest();
         for (SkuEsModel skuEsModel : skuEsModels) {
-            IndexRequest indexRequest = new IndexRequest();
+            IndexRequest indexRequest = new IndexRequest(EsConstant.PRODUCT_INDEX);
             indexRequest.id(skuEsModel.getSkuId().toString());
             String s = JSON.toJSONString(skuEsModel);
-            indexRequest.source(s);
+            indexRequest.source(s, XContentType.JSON);
             bulkRequest.add(indexRequest);
         }
+        System.out.println(bulkRequest);
         BulkResponse bulk = client.bulk(bulkRequest, GulimallElasticSearchConfig.COMMON_OPTIONS);
+        log.debug(bulk.toString());
+        System.out.println(bulk);
         return bulk.hasFailures();
     }
 }

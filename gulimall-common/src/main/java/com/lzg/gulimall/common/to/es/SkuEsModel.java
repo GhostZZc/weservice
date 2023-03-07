@@ -25,7 +25,7 @@ public class SkuEsModel {
 
     private Long brandId;
 
-    private Long catalogId;
+    private Long catelogId;
 
     private String brandName;
 
@@ -107,12 +107,12 @@ public class SkuEsModel {
         this.brandId = brandId;
     }
 
-    public Long getCatalogId() {
-        return catalogId;
+    public Long getCatelogId() {
+        return catelogId;
     }
 
-    public void setCatalogId(Long catalogId) {
-        this.catalogId = catalogId;
+    public void setCatelogId(Long catelogId) {
+        this.catelogId = catelogId;
     }
 
     public String getBrandName() {

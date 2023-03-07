@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 分页工具类
@@ -40,7 +41,7 @@ public class PageUtils implements Serializable {
 	 * 列表数据
 	 */
 	private List<?> list;
-	
+
 	/**
 	 * 分页
 	 * @param list        列表数据
@@ -60,11 +61,13 @@ public class PageUtils implements Serializable {
 	 * 分页
 	 */
 	public PageUtils(IPage<?> page) {
-		this.list = page.getRecords();
-		this.totalCount = (int)page.getTotal();
-		this.pageSize = (int)page.getSize();
-		this.currPage = (int)page.getCurrent();
-		this.totalPage = (int)page.getPages();
+		if(Objects.nonNull(page)){
+			this.list = page.getRecords();
+			this.totalCount = (int)page.getTotal();
+			this.pageSize = (int)page.getSize();
+			this.currPage = (int)page.getCurrent();
+			this.totalPage = (int)page.getPages();
+		}
 	}
 
 	public int getTotalCount() {
@@ -106,5 +109,5 @@ public class PageUtils implements Serializable {
 	public void setList(List<?> list) {
 		this.list = list;
 	}
-	
+
 }

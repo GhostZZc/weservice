@@ -14,7 +14,7 @@ import java.util.List;
  * @date: 2023/1/13 10:32
  */
 @Data
-@Accessors(chain = true)
+
 public class AttrGroupAttrVo extends AttrGroupEntity {
 
 

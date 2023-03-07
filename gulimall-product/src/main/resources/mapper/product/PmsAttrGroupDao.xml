@@ -24,17 +24,17 @@
                pa.attr_name,
                pa.search_type,
                pa.value_type,
-               pa.icon,
+               pa.icon       as icon1,
                pa.value_select,
                pa.attr_type,
                pa.`enable`,
-               pa.catelog_id,
+               pa.catelog_id as catelog_id1,
                pa.show_desc
         FROM pms_attr_group pag
                  LEFT JOIN pms_attr_attrgroup_relation paar on pag.attr_group_id = paar.attr_group_id
                  LEFT JOIN pms_attr pa on paar.attr_id = pa.attr_id
         where pag.catelog_id = #{catelogId}
-          and pa.catelog_id =#{catelogId};
+          and pa.catelog_id = #{catelogId};
     </select>
 
     <resultMap id="attrGroupResultMap" type="com.lzg.gulimall.product.vo.AttrGroupAttrVo">
@@ -42,20 +42,32 @@
         <result column="attr_group_name" property="attrGroupName"/>
         <result column="sort" property="sort"/>
         <result column="page.icon" property="icon"/>
-        <result column="pag.catelog_id" property="catelogId"/>
-        <association property="attrs" javaType="com.lzg.gulimall.product.entity.AttrEntity">
-            <result column="attr_id" property="attrId"/>
-            <result column="attr_name" property="attrName"/>
-            <result column="search_type" property="searchType"/>
-            <result column="value_type" property="valueType"/>
-            <result column="icon" property="icon"/>
-            <result column="value_select" property="valueSelect"/>
-            <result column="attr_type" property="attrType"/>
-            <result column="enable" property="enable"/>
-            <result column="pa.catelog_id" property="catelogId"/>
-            <result column="show_desc" property="showDesc"/>
-        </association>
+        <result column="catelog_id" property="catelogId"/>
+        <!--        <association property="attrs" javaType="com.lzg.gulimall.product.entity.AttrEntity">-->
+        <!--            <result column="attr_id" property="attrId"/>-->
+        <!--            <result column="attr_name" property="attrName"/>-->
+        <!--            <result column="search_type" property="searchType"/>-->
+        <!--            <result column="value_type" property="valueType"/>-->
+        <!--            <result column="icon1" property="icon"/>-->
+        <!--            <result column="value_select" property="valueSelect"/>-->
+        <!--            <result column="attr_type" property="attrType"/>-->
+        <!--            <result column="enable" property="enable"/>-->
+        <!--            <result column="catelog_id1" property="catelogId"/>-->
+        <!--            <result column="show_desc" property="showDesc"/>-->
+        <!--        </association>-->
+        <collection property="attrs" resultMap="attrs"/>
     </resultMap>
 
-
+    <resultMap id="attrs" type="com.lzg.gulimall.product.entity.AttrEntity">
+        <result column="attr_id" property="attrId"/>
+        <result column="attr_name" property="attrName"/>
+        <result column="search_type" property="searchType"/>
+        <result column="value_type" property="valueType"/>
+        <result column="icon1" property="icon"/>
+        <result column="value_select" property="valueSelect"/>
+        <result column="attr_type" property="attrType"/>
+        <result column="enable" property="enable"/>
+        <result column="catelog_id1" property="catelogId"/>
+        <result column="show_desc" property="showDesc"/>
+    </resultMap>
 </mapper>

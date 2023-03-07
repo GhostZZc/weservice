@@ -7,6 +7,7 @@ import com.lzg.gulimall.search.service.IElasticSaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -19,7 +20,8 @@ import java.util.List;
  * @author: lzg
  * @date: 2023/2/28 10:27
  */
-@RestController("/search/save")
+@RequestMapping("/search/save")
+@RestController
 public class ElasticSaveController {
 
     @Autowired
@@ -29,13 +31,14 @@ public class ElasticSaveController {
 
     @PostMapping("/product")
     public R upProductToElastic(@RequestBody List<SkuEsModel> skus){
-        Boolean aBoolean = false;
+        Boolean hasFail = false;
         try {
-            aBoolean = elasticSaveService.saveProductToElastic(skus);
+            hasFail = elasticSaveService.saveProductToElasticHasFail(skus);
+            System.out.println(1);
         } catch (IOException e) {
             return R.error(BizCodeEnum.PRODUCT_UP_EXCEPTION.getCode(), BizCodeEnum.PRODUCT_UP_EXCEPTION.getMsg());
         }
-        if(!aBoolean){
+        if(!hasFail){
             return R.ok();
         }else {
             return R.error(BizCodeEnum.PRODUCT_UP_EXCEPTION.getCode(), BizCodeEnum.PRODUCT_UP_EXCEPTION.getMsg());

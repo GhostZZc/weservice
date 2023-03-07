@@ -44,7 +44,10 @@ public class SkuInfoServiceImpl extends ServiceImpl<PmsSkuInfoDao, SkuInfoEntity
 
     @Override
     public List<SkuInfoEntity> getSkusBySpuId(Long spuId) {
-        return null;
+        QueryWrapper<SkuInfoEntity> qw = new QueryWrapper<>();
+        qw.eq("spu_id",spuId);
+        List<SkuInfoEntity> list = this.list(qw);
+        return list;
     }
 
     @Override

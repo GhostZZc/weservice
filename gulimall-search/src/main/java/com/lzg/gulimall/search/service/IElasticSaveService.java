@@ -8,6 +8,6 @@ import java.util.List;
 public interface IElasticSaveService {
 
 
-    Boolean saveProductToElastic(List<SkuEsModel> skuEsModels) throws IOException;
+    Boolean saveProductToElasticHasFail(List<SkuEsModel> skuEsModels) throws IOException;
 
 }
