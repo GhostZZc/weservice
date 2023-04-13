@@ -6,6 +6,16 @@ spring:
           uri: http://www.baidu.com
           predicates:
             - Query=url,baidu
+        - id: gulimall_host_route
+          uri: lb://gulimall-product
+          predicates:
+            - Host=gulimall.com
+
+        - id: gulimall_search_route
+          uri: lb://gulimall-search
+          predicates:
+            - Host=search.gulimall.com
+
         - id: ware_route
           uri: lb://gulimall-ware
           predicates:

@@ -1,8 +1,10 @@
 package com.lzg.gulimall.product.service.impl;
 
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -33,6 +35,13 @@ public class BrandServiceImpl extends ServiceImpl<PmsBrandDao, BrandEntity> impl
         return new PageUtils(page);
     }
 
+
+    @Cacheable(value = "brand",key = "'brandinf:'+#root.args[0]")
+    @Override
+    public List<BrandEntity> getBrandsByIds(List<Long> brandIds) {
+
+        return  baseMapper.selectList(new QueryWrapper<BrandEntity>().in("brand_id", brandIds));
+    }
 
 
 }
