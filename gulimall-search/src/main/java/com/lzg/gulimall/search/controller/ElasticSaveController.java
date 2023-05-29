@@ -34,6 +34,8 @@ public class ElasticSaveController {
         Boolean hasFail = false;
         try {
             hasFail = elasticSaveService.saveProductToElasticHasFail(skus);
+            System.out.println("皋月天清雨渐浓,遥看湖影日灼灼." +
+                                "却是芬芬桃色朦,青藤蔓布花正红.");
             System.out.println(1);
         } catch (IOException e) {
             return R.error(BizCodeEnum.PRODUCT_UP_EXCEPTION.getCode(), BizCodeEnum.PRODUCT_UP_EXCEPTION.getMsg());

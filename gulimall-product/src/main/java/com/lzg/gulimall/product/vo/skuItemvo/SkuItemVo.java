@@ -21,7 +21,7 @@ public class SkuItemVo {
     //3.spu的销售属性组合
     List<SkuItemSaleAttrsVo> saleAttr;
 
-    //4.spu的详细介绍
+    //4.spu的详细介绍 pms_spu_info_desc
     SpuInfoDescEntity desp;
 
     //5.规格参数

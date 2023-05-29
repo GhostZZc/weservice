@@ -1,17 +1,17 @@
 package com.lzg.gulimall.ware.controller;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
+import com.lzg.gulimall.ware.vo.PurchaseDoneVo;
+import com.lzg.gulimall.ware.vo.PurchaseMergeVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.lzg.gulimall.ware.entity.PurchaseEntity;
 import com.lzg.gulimall.ware.service.PurchaseService;
@@ -61,6 +61,8 @@ public class PurchaseController {
     @RequestMapping("/save")
     @RequiresPermissions("ware:purchase:save")
     public R save(@RequestBody PurchaseEntity purchase){
+        purchase.setCreateTime(new Date());
+        purchase.setUpdateTime(new Date());
 		purchaseService.save(purchase);
 
         return R.ok();
@@ -72,6 +74,7 @@ public class PurchaseController {
     @RequestMapping("/update")
     @RequiresPermissions("ware:purchase:update")
     public R update(@RequestBody PurchaseEntity purchase){
+        purchase.setUpdateTime(new Date());
 		purchaseService.updateById(purchase);
 
         return R.ok();
@@ -87,5 +90,46 @@ public class PurchaseController {
 
         return R.ok();
     }
+
+    /**
+     * 查询未领取的采购单
+     * @param params
+     * @return
+     */
+    @GetMapping("/unreceive/list")
+    public R unReceive(@RequestParam Map<String, Object> params){
+        PageUtils page = purchaseService.queryUnReceiveList(params);
+        return R.ok().put("page",page);
+    }
+
+
+    /**
+     * 合并采购单项到采购单上
+     * @param purchaseMergeVo
+     * @return
+     */
+    @PostMapping("/merge")
+    public R mergePurchase(@RequestBody PurchaseMergeVo purchaseMergeVo){
+        purchaseService.purchaseMerge(purchaseMergeVo);
+        return R.ok();
+    }
+
+    /**
+     * 领取采购单
+     * @param ids
+     * @return
+     */
+    @PostMapping("/received")
+    public R receivedPurchase(@RequestBody List<Long> ids){
+        purchaseService.receivedPurchaseOrder(ids);
+        return R.ok();
+    }
+
+    @PostMapping("/done")
+    public R donePurchase(@RequestBody PurchaseDoneVo purchaseDoneVo){
+        purchaseService.purchaseDone(purchaseDoneVo);
+        return R.ok();
+    }
+
 
 }

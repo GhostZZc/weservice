@@ -17,8 +17,8 @@ public class SearchController {
     MallSearchService mallSearchService;
 
 
-    @GetMapping(value = {"/search.html","/"})
-    public String lisgPage(SearchParamVo paramVo, Model model, HttpServletRequest request){
+    @GetMapping(value = {"/list.html","/"})
+    public String listPage(SearchParamVo paramVo, Model model, HttpServletRequest request){
         //根据页面传递的数据查询参数，去es中检索商品
         String queryString = request.getQueryString();
         paramVo.set_queryString(queryString);

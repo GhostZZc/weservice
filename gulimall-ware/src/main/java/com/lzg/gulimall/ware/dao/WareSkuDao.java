@@ -17,4 +17,5 @@ public interface WareSkuDao extends BaseMapper<WareSkuEntity> {
 
     Long getSkuStock(Long skuId);
 
+    void updateSkuStock(Long skuId,Long wareId,Integer skuNum);
 }

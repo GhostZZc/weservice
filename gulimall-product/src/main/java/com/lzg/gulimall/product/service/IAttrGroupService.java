@@ -7,6 +7,7 @@ import com.lzg.gulimall.product.entity.AttrGroupEntity;
 import com.lzg.gulimall.product.entity.AttrEntity;
 import com.lzg.gulimall.product.vo.AttrGroupAttrVo;
 import com.lzg.gulimall.product.vo.AttrGroupVo;
+import com.lzg.gulimall.product.vo.skuItemvo.SpuItemAttrGroupVo;
 
 
 import java.util.List;
@@ -30,5 +31,7 @@ public interface IAttrGroupService extends IService<AttrGroupEntity> {
     List<AttrEntity> getAttrByAttrGroupId(Long attrGroupId);
 
     PageUtils getNoAttrs(Map<String, Object> params,Long attrgroupId);
+
+    List<SpuItemAttrGroupVo> getSpuItemAttrGroupByCateIdAndSpuId(Long categoryId,Long spuId);
 }
 

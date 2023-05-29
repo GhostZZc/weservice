@@ -1,8 +1,11 @@
 package com.lzg.gulimall.product.controller.app;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.common.utils.R;
+import com.lzg.gulimall.product.entity.ProductAttrValueEntity;
 import com.lzg.gulimall.product.service.IAttrService;
+import com.lzg.gulimall.product.service.IProductAttrValueService;
 import com.lzg.gulimall.product.utils.AttrType;
 import com.lzg.gulimall.product.vo.AttrVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,6 +29,9 @@ import java.util.Map;
 public class AttrController {
     @Autowired
     private IAttrService pmsAttrService;
+    @Autowired
+    private IProductAttrValueService productAttrValueService;
+
 
     /**
      * 规格参数列表
@@ -84,5 +91,30 @@ public class AttrController {
 
         return R.ok();
     }
+
+    /**
+     * 获取spu规格
+     * @param spuId
+     * @return
+     */
+    @GetMapping("/base/listforspu/{spuId}")
+    public R listForSpu(@PathVariable Long spuId){
+        List<ProductAttrValueEntity> list = productAttrValueService.list(new QueryWrapper<ProductAttrValueEntity>().eq("spu_id", spuId));
+        return R.ok().put("data",productAttrValueService);
+    }
+
+    /**
+     * 修改spu规格
+     * @param spuId
+     * @param attrs
+     * @return
+     */
+    @PostMapping("/update/{spuId}")
+    public R updateAttr(@PathVariable("spuId") Long spuId,List<ProductAttrValueEntity> attrs){
+        productAttrValueService.updateAttr(spuId,attrs);
+        return R.ok();
+    }
+
+
 
 }

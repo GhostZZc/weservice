@@ -48,7 +48,7 @@
         <remote-addr>192.168.1.10:22</remote-addr>
         <remote-username>root</remote-username>
         <remote-passwd>123456</remote-passwd>
-        <spring-cloud.version>2021.0.1</spring-cloud.version>
+        <spring-cloud.version>2.2.1.RELEASE</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -238,17 +238,6 @@
             <version>${lombok.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.lzg</groupId>
-            <artifactId>gulimall-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-webmvc</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             <exclusions>
@@ -257,10 +246,6 @@
                     <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

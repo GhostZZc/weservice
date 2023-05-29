@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.lzg.gulimall.common.utils.PageUtils;
 import com.lzg.gulimall.product.entity.CategoryEntity;
 import com.lzg.gulimall.product.vo.CategoryVo;
+import com.lzg.gulimall.product.vo.Catelog2Vo;
 
 import java.util.List;
 import java.util.Map;
@@ -24,5 +25,7 @@ public interface ICategoryService extends IService<CategoryEntity> {
     List<CategoryEntity> getLevel1Categorys();
 
     List<CategoryVo> getCategoryTree();
+
+    Map<String, List<Catelog2Vo>> getCatelogJson();
 }
 

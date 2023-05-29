@@ -6,10 +6,12 @@ import com.lzg.gulimall.product.entity.AttrAttrgroupRelationEntity;
 import com.lzg.gulimall.product.service.IAttrAttrgroupRelationService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.UUID;
 
 
 /**
@@ -36,6 +38,16 @@ public class AttrAttrgroupRelationController {
         return R.ok().put("page", page);
     }
 
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
+    @GetMapping("/redis")
+    public R redis(){
+        String key = UUID.randomUUID().toString();
+        redisTemplate.opsForValue().set(key,"hello");
+        return R.ok();
+
+
+    }
 
     /**
      * 信息

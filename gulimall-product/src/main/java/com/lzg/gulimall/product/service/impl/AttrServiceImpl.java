@@ -15,6 +15,7 @@ import com.lzg.gulimall.product.vo.AttrVo;
 import com.lzg.gulimall.product.vo.CategoryVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -89,7 +90,7 @@ public class AttrServiceImpl extends ServiceImpl<PmsAttrDao, AttrEntity> impleme
 
         return attrVo;
     }
-
+    @Cacheable(value = "attr",key = "'attrinfo:'+#root.args[0]")
     @Override
     public AttrVo getById(Long attrId) {
         AttrEntity attr = this.getOne(new QueryWrapper<AttrEntity>().eq("attr_id", attrId));

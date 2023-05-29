@@ -45,7 +45,7 @@ public class SkuInfoController {
     public R info(@PathVariable("skuId") Long skuId){
 		SkuInfoEntity pmsSkuInfo = pmsSkuInfoService.getById(skuId);
 
-        return R.ok().put("pmsSkuInfo", pmsSkuInfo);
+        return R.ok().put("skuInfo", pmsSkuInfo);
     }
 
     /**

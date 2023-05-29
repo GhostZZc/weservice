@@ -14,6 +14,7 @@ import com.lzg.gulimall.product.utils.CategoryPathUtil;
 import com.lzg.gulimall.product.vo.AttrGroupAttrVo;
 import com.lzg.gulimall.product.vo.AttrGroupVo;
 import com.lzg.gulimall.product.vo.CategoryVo;
+import com.lzg.gulimall.product.vo.skuItemvo.SpuItemAttrGroupVo;
 import lombok.AllArgsConstructor;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -103,6 +104,11 @@ public class AttrGroupServiceImpl extends ServiceImpl<PmsAttrGroupDao, AttrGroup
         }
         return null;
 
+    }
+
+    @Override
+    public List<SpuItemAttrGroupVo> getSpuItemAttrGroupByCateIdAndSpuId(Long categoryId, Long spuId) {
+        return baseMapper.getSpuItemAttrGroupByCateIdAndSpuId(categoryId,spuId);
     }
 
 

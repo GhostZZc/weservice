@@ -18,4 +18,9 @@
         select SUM(stock-IFNULL(stock_locked,0)) FROM wms_ware_sku where sku_id=#{skuId};
     </select>
 
+    <!--void updateSkuStock(Long skuId,Long wareId,Integer skuNum);-->
+    <update id="updateSkuStock">
+        update from wms_ware_sku set stock = stock+#{skuNum} where sku_id = #{skuId} and ware_id = #{wareId}
+    </update>
+
 </mapper>

@@ -1,6 +1,10 @@
 package com.lzg.gulimall.ware.service.impl;
 
 import com.lzg.gulimall.common.to.SkuHasStockVo;
+import com.lzg.gulimall.common.utils.R;
+import com.lzg.gulimall.ware.entity.SkuInfoEntity;
+import com.lzg.gulimall.ware.feign.ProductFeignClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,6 +28,9 @@ import org.springframework.util.StringUtils;
 
 @Service("wareSkuService")
 public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> implements WareSkuService {
+
+    @Autowired
+    private ProductFeignClient productFeignClient;
 
 
     @Override
@@ -63,6 +70,34 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
             return collect;
         }
         return new ArrayList<>(0);
+    }
+
+    @Override
+    public void updateWareStock(Long skuId, Long wareId, Integer skuNum) {
+        //先查,有这条库存信息就修改库存  没有就新建
+        R result = new R();
+        try {
+           result = productFeignClient.getSkuInfo(skuId);
+        }catch (Exception e){
+
+        }
+        SkuInfoEntity skuInfo = new SkuInfoEntity();
+        if (result.getCode()==0){
+            skuInfo = (SkuInfoEntity) result.get("skuInfo");
+        }
+        WareSkuEntity wareSkuEntity = new WareSkuEntity();
+        wareSkuEntity.setSkuId(skuId);
+        wareSkuEntity.setWareId(wareId);
+        QueryWrapper<WareSkuEntity> qw = new QueryWrapper<>(wareSkuEntity);
+        WareSkuEntity one = this.getOne(qw);
+        if(Objects.nonNull(one)){
+            baseMapper.updateSkuStock(skuId,wareId,skuNum);
+        }else{
+            wareSkuEntity.setStock(skuNum);
+            wareSkuEntity.setSkuName(skuInfo.getSkuName());
+            this.save(wareSkuEntity);
+        }
+
     }
 
 }
