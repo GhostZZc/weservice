@@ -3,6 +3,8 @@ package com.lzg.gulimall.ware.service.impl;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 import java.util.Map;
+import java.util.Objects;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -21,12 +23,12 @@ public class WareInfoServiceImpl extends ServiceImpl<WareInfoDao, WareInfoEntity
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         QueryWrapper<WareInfoEntity> qw = new QueryWrapper<>();
-        String wareId = (String) params.get("wareId");
-        String skuId = (String) params.get("skuId");
-        if(Strings.isNotEmpty(wareId)){
+        Object wareId =  params.get("wareId");
+        Object skuId = params.get("skuId");
+        if(!Objects.isNull(wareId)){
             qw.eq("wareId",wareId);
         }
-        if(Strings.isNotEmpty(skuId)){
+        if(!Objects.isNull(skuId)){
             qw.eq("skuId",skuId);
         }
         IPage<WareInfoEntity> page = this.page(
