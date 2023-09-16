@@ -1,9 +1,12 @@
 spring:
   application:
     name: gulimall-auth-server
+  session:
+    store-type: redis
   profiles:
     active: dev
-
+  thymeleaf:
+    cache: false
   cloud:
     nacos:
       discovery:
@@ -15,4 +18,7 @@ spring:
         file-extension: yaml
         server-addr: localhost:8848
         group: SERVER
-
+  redis:
+    host: localhost
+    port: 6379
+    password: root

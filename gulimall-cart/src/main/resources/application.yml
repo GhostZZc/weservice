@@ -1,0 +1,9 @@
+server:
+  port: 92
+
+#线程池配置
+gulimall:
+  thrad:
+    core-thread-size: 20
+    max-thread_size: 200
+    keep-alive-time: 10

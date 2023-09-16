@@ -105,6 +105,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<PmsSpuInfoDao, SpuInfoEntity
         //1.先保存spu基本信息pms_spu_info
         SpuInfoEntity spuInfoEntity = new SpuInfoEntity();
         OrikaBeanMapper.copy(spuSaveVo, spuInfoEntity);
+        spuInfoEntity.setCatelogId(spuSaveVo.getCatalogId());
         spuInfoEntity.setCreateTime(new Date());
         spuInfoEntity.setUpdateTime(new Date());
         this.save(spuInfoEntity);
@@ -156,7 +157,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<PmsSpuInfoDao, SpuInfoEntity
                     SkuInfoEntity skuInfoEntity = new SkuInfoEntity();
                     OrikaBeanMapper.copy(it, skuInfoEntity);
                     skuInfoEntity.setSpuId(spuId);
-                    skuInfoEntity.setCatelogId(spuSaveVo.getCatelogId());
+                    skuInfoEntity.setCatelogId(spuSaveVo.getCatalogId());
                     skuInfoEntity.setBrandId(spuSaveVo.getBrandId());
                     skuInfoEntity.setSkuDefaultImg(defaultImg);
                     skuInfoEntity.setSaleCount(0L);

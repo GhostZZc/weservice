@@ -1,9 +1,11 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.110.85:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: 12345678
+  session:
+    store-type: redis
   thymeleaf:
     cache: false
   redis:
@@ -30,6 +32,9 @@ mybatis-plus:
 
 server:
   port: 86
+  servlet:
+    session:
+      timeout: 30m
 
 
 

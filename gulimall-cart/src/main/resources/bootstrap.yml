@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: gulimall-cart
+  profiles:
+    active: dev
+  redis:
+    host: localhost
+    port: 6379
+    password: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        group: SERVER
+        namespace: 288d4ac4-5a51-4147-ace8-cbb5919f5252
+      config:
+        namespace: 288d4ac4-5a51-4147-ace8-cbb5919f5252
+        file-extension: yaml
+        server-addr: localhost:8848
+        group: SERVER
