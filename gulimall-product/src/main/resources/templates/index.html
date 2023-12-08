@@ -99,7 +99,7 @@
                class="aa">你好，请登录</a>
             <a th:else class="aa" style="width: 100px">[[${session.loginUser==null?'':session.loginUser.nickname}]]</a>
           </li>
-          <li><a href="http://auth.gulimall.com/reg.html" class="li_2" th:if="${session.loginUser==null}">免费注册</a>
+          <li><a href="http://auth.gulimall.com/reg.html" class="li_2" th:if="${session.loginUser==null}" style="color: red">免费注册</a>
           </li>
           <span>|</span>
           <li>

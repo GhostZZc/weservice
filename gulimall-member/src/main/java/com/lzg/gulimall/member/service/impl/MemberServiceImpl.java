@@ -54,13 +54,15 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
         String encode = bCryptPasswordEncoder.encode(memberRegistVo.getPassword());
         memberEntity.setPassword(encode);
         memberEntity.setLevelId(defaultLevel.getId());
+
+        memberEntity.setNickname(memberRegistVo.getUserName());
         this.save(memberEntity);
     }
 
     @Override
     public MemberEntity login(MemberLoginVo memberLoginVo) {
         MemberEntity one = this.getOne(new QueryWrapper<MemberEntity>()
-                .eq("username", memberLoginVo.getLoginnacct()).or().eq("mobile", memberLoginVo.getLoginnacct()));
+                .eq("username", memberLoginVo.getLoginacct()).or().eq("mobile", memberLoginVo.getLoginacct()));
         if(Objects.isNull(one)){
             return null;
         }

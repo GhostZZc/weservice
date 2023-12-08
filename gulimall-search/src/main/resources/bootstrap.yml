@@ -4,12 +4,19 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.110.85:8848
+        server-addr: localhost:8848
         namespace: 288d4ac4-5a51-4147-ace8-cbb5919f5252
         group: SERVER
   application:
     name: gulimall-search
   thymeleaf:
     cache: false
+  redis:
+    host: localhost
+    port: 6379
+    password: root
+  session:
+    store-type: redis
 server:
   port: 90
+

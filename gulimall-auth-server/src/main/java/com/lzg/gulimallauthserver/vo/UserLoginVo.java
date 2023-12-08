@@ -2,6 +2,8 @@ package com.lzg.gulimallauthserver.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @ClassName: UserLoginVo
  * @Description: 用户登录Vo
@@ -9,7 +11,7 @@ import lombok.Data;
  * @date: 2023/6/29 10:38
  */
 @Data
-public class UserLoginVo {
+public class UserLoginVo implements Serializable {
     /**
      * 登录账户:用户名或手机号
      */

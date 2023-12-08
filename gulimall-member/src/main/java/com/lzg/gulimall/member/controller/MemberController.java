@@ -124,7 +124,7 @@ public class MemberController {
         return R.ok();
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public R login(@RequestBody MemberLoginVo memberLoginVo){
         MemberEntity login = memberService.login(memberLoginVo);
         if (Objects.nonNull(login)){

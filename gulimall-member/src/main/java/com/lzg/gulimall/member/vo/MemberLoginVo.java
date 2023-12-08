@@ -2,6 +2,8 @@ package com.lzg.gulimall.member.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @ClassName: MemberLoginVo
  * @Description: 会员登录Vo
@@ -9,12 +11,12 @@ import lombok.Data;
  * @date: 2023/6/29 11:08
  */
 @Data
-public class MemberLoginVo {
+public class MemberLoginVo implements Serializable {
 
     /**
      * 登录账户: 用户名或手机号
      */
-    private String loginnacct;
+    private String loginacct;
 
     /**
      * 密码

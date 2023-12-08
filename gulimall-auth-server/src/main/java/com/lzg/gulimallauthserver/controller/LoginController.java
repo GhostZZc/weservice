@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -62,7 +64,7 @@ public class LoginController {
         String codeTime = redisTemplate.opsForValue().get(SmsConstant.SMS_CODE_CACHE_PREFIX + phone);
         if(StringUtils.hasText(codeTime)){
             long saveTime = Long.parseLong(codeTime.split("_")[1]);
-            if(System.currentTimeMillis()-saveTime<6000){
+            if(System.currentTimeMillis()-saveTime<60000){
                 return R.error(BizCodeEnum.SMS_CODE_EXCEPTION.getCode(),BizCodeEnum.SMS_CODE_EXCEPTION.getMsg());
             }
         }
@@ -75,9 +77,13 @@ public class LoginController {
 
 
     @GetMapping("/login.html")
-    public String loginPage(HttpServletRequest request){
-        log.info("请求路径为:"+request.getRequestURI());
-        return "login";
+    public String loginPage(HttpSession session){
+        Object attribute = session.getAttribute(AuthServerConstant.LOGIN_USER);
+        if(Objects.nonNull(attribute)){
+            return "redirect:http://gulimall.com";
+        }else{
+            return "login";
+        }
     }
 
 
@@ -92,11 +98,7 @@ public class LoginController {
         //校验出错,转发到注册页
         if(bingingResult.hasErrors()){
             Map<String, String> errors = bingingResult.getFieldErrors().stream()
-                    .collect(Collectors.toMap(item -> {
-                return item.getField();
-            }, item -> {
-                return item.getDefaultMessage();
-            }));
+                    .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
             redirectAttributes.addFlashAttribute("errors",errors);
             return "redirect:http://auth.gulimall.com/reg.html";
         }
@@ -130,6 +132,7 @@ public class LoginController {
             redirectAttributes.addFlashAttribute("errors",errors);
             return "redirect:http://auth.gulimall.com/reg.html";
         }
+
     }
 
     @PostMapping("/login")
